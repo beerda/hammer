@@ -1,10 +1,14 @@
 Package: hammer
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Personal package of miscellaneous R functions for data analyses 
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person(given = "Michal",
+           family = "Burda",
+           role = c("aut", "cre"),
+           email = "michal.burda@osu.cz",
+           comment = c(ORCID = "0000-0002-4182-4407"))
+Maintainer: Michal Burda <michal.burda@osu.cz>
+Description: Personal package of miscellaneous R functions for data analyses 
 License: GPL (>= 3)
 Suggests: 
     testthat (>= 3.0.0)
