@@ -3,6 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom cli cli_abort
+#' @importFrom rlang caller_env
 #' @importFrom rlang is_integer
 #' @importFrom rlang is_integerish
 #' @importFrom rlang is_scalar_character

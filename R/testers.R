@@ -103,6 +103,30 @@
 .must_be_in_range <- ..must_be_comparable(function(x, range) x >= range[1] & x <= range[2],
                                           "between")
 
+.must_have_length <- function(x,
+                              value,
+                              name = deparse(substitute(x)),
+                              call = caller_env()) {
+    if (!isTRUE(length(x) == value)) {
+        cli_abort(c("{.var {name}} must have {value} elements.",
+                    ..error_details("{.var {name}} has {length(x)} elements.")),
+                  call = call)
+    }
+}
+
+.must_have_equal_lengths <- function(x,
+                                     y,
+                                     name_x = deparse(substitute(x)),
+                                     name_y = deparse(substitute(y)),
+                                     call = caller_env()) {
+    if (!isTRUE(length(x) == length(y))) {
+        cli_abort(c("{.var {name_x}} and {.var {name_y}} must have the same number of elements.",
+                    ..error_details(c("{.var {name_x}} has {length(x)} elements.",
+                                      "{.var {name_y}} has {length(y)} elements."))),
+                    call = call)
+    }
+}
+
 .must_be_list_of_equal_length_vectors <- function(x,
                                                   name = deparse(substitute(x)),
                                                   call = caller_env()) {
