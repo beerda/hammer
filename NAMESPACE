@@ -3,6 +3,7 @@
 export(format_enumeration)
 export(format_interval)
 export(format_number)
+export(format_percent)
 importFrom(cli,cli_abort)
 importFrom(rlang,caller_env)
 importFrom(rlang,is_integer)
