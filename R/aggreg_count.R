@@ -1,4 +1,4 @@
-#' Compute the count of given level in given vector
+#' Compute the count of the given level in the given vector
 #'
 #' The function returns the number of occurrences of `level` in vector `x`.
 #'
@@ -7,6 +7,7 @@
 #' The integerish value is treated as the index of level to be counted, character value selects
 #' the level to be counted by its name, and `NA` selects missing values to be counted.
 #' @return The number of occurences of `level` in `x`
+#' @seealso [aggreg_percent()]
 #' @author Michal Burda
 #' @export
 #' @examples

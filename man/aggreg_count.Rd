@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggreg_count.R
 \name{aggreg_count}
 \alias{aggreg_count}
-\title{Compute the count of given level in given vector}
+\title{Compute the count of the given level in the given vector}
 \usage{
 aggreg_count(x, level = 1)
 }
@@ -24,6 +24,9 @@ aggreg_count(c(F,F,T,T,T), level = 1)           # 3
 aggreg_count(c(F,F,T,T,T), level = "FALSE")     # 2
 aggreg_count(c("b", "a", "a"), level = "a")     # 2
 aggreg_count(c(NA, "b", "a", "a"), level = NA)  # 1
+}
+\seealso{
+\code{\link[=aggreg_percent]{aggreg_percent()}}
 }
 \author{
 Michal Burda
