@@ -15,7 +15,7 @@ format_percent(x, ...)
 a character vector
 }
 \description{
-The numeric vector is multiplied by 100, rouned, and the percent sign (\verb{\%}) is appended to it.
+The numeric vector is multiplied by 100, rounded, and the percent sign (\verb{\%}) is appended to it.
 }
 \author{
 Michal Burda

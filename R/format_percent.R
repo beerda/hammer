@@ -1,6 +1,6 @@
 #' Convert the numeric vector to a character vector in a percentage formatting.
 #'
-#' The numeric vector is multiplied by 100, rouned, and the percent sign (`%`) is appended to it.
+#' The numeric vector is multiplied by 100, rounded, and the percent sign (`%`) is appended to it.
 #'
 #' @param x a numeric vector to be transformed
 #' @param ... further arguments passed to [format_number()]
