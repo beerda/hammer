@@ -3,8 +3,9 @@
              name = deparse(substitute(x)),
              call = caller_env()) {
         if (!isTRUE(f(x))) {
+            na <- if (all(is.na(x))) " NA" else ""
             cli_abort(c("{.var {name}} must be a {msg}.",
-                        "x" = "You've supplied a {.cls {class(x)}}."),
+                        "x" = "You've supplied a {.cls {class(x)}}{na}."),
                       call = call)
         }
     }
@@ -80,16 +81,19 @@
 }
 
 
+.must_be_flag <- ..must_be_type(function(x) is_scalar_logical(x) && !is.na(x), "flag (TRUE or FALSE)")
+
+.must_be_atomic_scalar <- ..must_be_type(is_scalar_atomic, "atomic scalar")
 .must_be_integerish_scalar <- ..must_be_type(is_scalar_integerish, "integerish scalar")
 .must_be_double_scalar <- ..must_be_type(is_scalar_double, "double scalar")
 .must_be_character_scalar <- ..must_be_type(is_scalar_character, "character scalar")
 .must_be_logical_scalar <- ..must_be_type(is_scalar_logical, "logical scalar")
 
-
 .must_be_atomic_vector <- ..must_be_type(is.atomic, "atomic vector")
 .must_be_integer_vector <- ..must_be_type(is_integer, "integer vector")
 .must_be_integerish_vector <- ..must_be_type(is_integerish, "integerish vector")
 .must_be_numeric_vector <- ..must_be_type(is.numeric, "numeric vector")
+.must_be_factor <- ..must_be_type(is.factor, "factor")
 .must_be_matrix <- ..must_be_type(is.matrix, "matrix")
 .must_be_function <- ..must_be_type(is.function, "function")
 .must_be_list <- ..must_be_type(is.list, "list")
