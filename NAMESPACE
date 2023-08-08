@@ -2,6 +2,7 @@
 
 export(aggreg_count)
 export(aggreg_percent)
+export(format_count_percent)
 export(format_enumeration)
 export(format_interval)
 export(format_number)
