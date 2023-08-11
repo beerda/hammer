@@ -2,6 +2,7 @@
 
 export(aggreg_count)
 export(aggreg_percent)
+export(cat0)
 export(format_bars)
 export(format_count_percent)
 export(format_enumeration)
