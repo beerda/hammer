@@ -21,9 +21,9 @@
 format_pvalue <- function(x,
                           digits = 4,
                           thresh = 0.05,
-                          varname = '',
-                          ns = 'NS',
-                          na = 'NA') {
+                          varname = "",
+                          ns = "NS",
+                          na = "NA") {
     .must_be_numeric_vector(x)
     .must_be_integerish_scalar(digits)
     .must_be_greater_eq(digits, 0)
@@ -33,7 +33,7 @@ format_pvalue <- function(x,
     .must_be_character_scalar(ns)
     .must_be_character_scalar(na)
 
-    eq <- ifelse(varname != '', '=', '')
+    eq <- ifelse(varname != "", "=", "")
     na <- paste0(varname, eq, na)
     ns <- paste0(varname, eq, ns)
     res <- vapply(x, function(p) {
@@ -44,7 +44,7 @@ format_pvalue <- function(x,
             return(ns)
         }
         if (p < 1/10^digits) {
-            return(paste0(varname, '<', format(1/10^digits, nsmall=digits, scientific=FALSE)))
+            return(paste0(varname, "<", format(1/10^digits, nsmall=digits, scientific=FALSE)))
         } else {
             return(paste0(varname, eq, format_number(p, digits)))
         }
