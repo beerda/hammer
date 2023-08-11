@@ -103,7 +103,10 @@
 .must_be_list_of_characters <- ..must_be_list_of(is.character, "character vectors")
 
 .must_be_finite <- ..must_be_value(is.finite, "finite")
+.must_be_greater <- ..must_be_comparable(`>`, ">")
 .must_be_greater_eq <- ..must_be_comparable(`>=`, ">=")
+.must_be_lower <- ..must_be_comparable(`<`, "<")
+.must_be_lower_eq <- ..must_be_comparable(`<=`, "<=")
 .must_be_in_range <- ..must_be_comparable(function(x, range) x >= range[1] & x <= range[2],
                                           "between")
 
