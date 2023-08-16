@@ -4,7 +4,7 @@
 \alias{aggreg_percent}
 \title{Compute the relative frequency (percentage) of the given level in the given vector}
 \usage{
-aggreg_percent(x, level = 1, use_na = FALSE)
+aggreg_percent(x, level = 1, use_na = FALSE, ...)
 }
 \arguments{
 \item{x}{the vector to compute the occurences of \code{level} in. It must be an atomic vector.}
@@ -14,6 +14,8 @@ The integerish value is treated as the index of level to be counted, character v
 the level to be counted by its name, and \code{NA} selects missing values to be counted.}
 
 \item{use_na}{if \code{FALSE} then \code{NA} values are omitted prior computing the frequency.}
+
+\item{...}{further arguments passed to \code{\link[=format_percent]{format_percent()}}}
 }
 \value{
 The relative number of occurences of \code{level} in \code{x}, i.e., the fraction in \link{0,1}.
