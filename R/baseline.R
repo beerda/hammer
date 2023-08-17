@@ -59,7 +59,10 @@ baseline <- function(.data,
                      .numeric_stat = c("robust", "parametric", "test"),
                      .normality_test = shapiro.test,
                      .normality_thresh = 0.05,
-                     .numeric_aggreg = NULL,
+                     .numeric_aggreg = switch(.numeric_stat,
+                                              robust = aggreg_median_iqr,
+                                              parametric = aggreg_mean_sd,
+                                              test = .create_test_based_aggreg(.normality_test, .normality_thresh)),
                      .categ_aggreg = aggreg_count_percent,
                      ...) {
     .numeric_stat <- match.arg(.numeric_stat)
@@ -73,21 +76,8 @@ baseline <- function(.data,
     .must_be_double_scalar(.normality_thresh)
     .must_be_function(.normality_test)
     .must_be_in_range(.normality_thresh, c(0, 0.1))
-    .must_be_function(.numeric_aggreg, null = TRUE)
+    .must_be_function(.numeric_aggreg)
     .must_be_function(.categ_aggreg)
-
-    if (is.null(.numeric_aggreg)) {
-        if (.numeric_stat == "robust")
-            .numeric_aggreg <- aggreg_median_iqr
-        else if (.numeric_stat == "parametric")
-            .numeric_aggreg <- aggreg_mean_sd
-        else
-            .numeric_aggreg <- .create_test_based_aggreg(.normality_test, .normality_thresh)
-    }
-
-    if (is.null(.categ_aggreg)) {
-        .categ_aggreg <- aggreg_count_percent
-    }
 
     groups <- NULL
     if (n_groups(.data) > 0) {

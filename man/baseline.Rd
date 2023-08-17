@@ -13,8 +13,9 @@ baseline(
   .numeric_stat = c("robust", "parametric", "test"),
   .normality_test = shapiro.test,
   .normality_thresh = 0.05,
-  .numeric_aggreg = NULL,
-  .categ_aggreg = aggreg_count_percent(),
+  .numeric_aggreg = switch(.numeric_stat, robust = aggreg_median_iqr, parametric =
+    aggreg_mean_sd, test = .create_test_based_aggreg(.normality_test, .normality_thresh)),
+  .categ_aggreg = aggreg_count_percent,
   ...
 )
 }
