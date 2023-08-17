@@ -1,9 +1,11 @@
 ..must_be_type <- function(f, msg) {
     function(x,
+             null = FALSE,
              name = deparse(substitute(x)),
              call = caller_env()) {
-        if (!isTRUE(f(x))) {
+        if (!isTRUE(f(x) | (null && is.null(x)))) {
             na <- if (all(is.na(x))) " NA" else ""
+            msg <- if (null) paste(msg, "or NULL") else msg
             cli_abort(c("{.var {name}} must be a {msg}.",
                         "x" = "You've supplied a {.cls {class(x)}}{na}."),
                       call = call)
@@ -97,6 +99,7 @@
 .must_be_matrix <- ..must_be_type(is.matrix, "matrix")
 .must_be_function <- ..must_be_type(is.function, "function")
 .must_be_list <- ..must_be_type(is.list, "list")
+.must_be_data_frame <- ..must_be_type(is.data.frame, "data frame")
 
 .must_be_list_of_logicals <- ..must_be_list_of(is.logical, "logical vectors")
 .must_be_list_of_doubles <- ..must_be_list_of(is.double, "double (numeric) vectors")
