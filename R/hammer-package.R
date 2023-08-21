@@ -9,6 +9,7 @@
 #' @importFrom dplyr group_keys
 #' @importFrom dplyr group_rows
 #' @importFrom dplyr n_groups
+#' @importFrom dplyr tibble
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 after_stat
 #' @importFrom ggplot2 geom_bar
