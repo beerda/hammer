@@ -3,6 +3,8 @@
 
 ## usethis namespace: start
 #' @importFrom cli cli_abort
+#' @importFrom dplyr as_tibble
+#' @importFrom dplyr bind_rows
 #' @importFrom dplyr group_by
 #' @importFrom dplyr group_keys
 #' @importFrom dplyr group_rows
