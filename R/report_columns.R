@@ -7,7 +7,7 @@
 report_columns <- function(.data) {
     .must_be_data_frame(.data)
 
-    rows <- tibble()
+    res <- tibble()
 
     for (var in colnames(.data)) {
         x <- .data[[var]]
@@ -28,7 +28,7 @@ report_columns <- function(.data) {
             r$details <- paste("unique:", length(unique(x)))
         }
 
-        new_row(rows) <- r
+        new_row(res) <- r
 
         if (is.factor(x)) {
             for (l in levels(x)) {
@@ -37,11 +37,11 @@ report_columns <- function(.data) {
                             values = aggreg_count_percent(x, level = l),
                             `N/A` = "",
                             details = "")
-                new_row(rows) <- r
+                new_row(res) <- r
 
             }
         }
     }
 
-    rows
+    res
 }
