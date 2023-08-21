@@ -16,6 +16,6 @@ aggreg_mean_sd <- function(x, ...) {
     s <- sd(x, na.rm = TRUE)
 
     paste(format_number(m, ...),
-          '±',
+          '\u00B1',               # plusminus sign
           format_number(s, ...))
 }
