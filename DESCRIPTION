@@ -8,7 +8,7 @@ Authors@R:
            email = "michal.burda@osu.cz",
            comment = c(ORCID = "0000-0002-4182-4407"))
 Maintainer: Michal Burda <michal.burda@osu.cz>
-Description: Personal package of miscellaneous R functions for data analyses 
+Description: Personal package of miscellaneous R functions for data analyses.
 License: GPL (>= 3)
 Suggests: 
     testthat (>= 3.0.0)
@@ -20,5 +20,8 @@ Imports:
     cli,
     dplyr,
     ggplot2,
+    graphics,
+    grDevices,
     rlang,
+    stats,
     vctrs
