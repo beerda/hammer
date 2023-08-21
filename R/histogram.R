@@ -76,5 +76,5 @@ histogram <- function(x,
         }
     }
 
-    g + xlab(name) + ylab('count')
+    g + xlab(name) + ylab("count")
 }
