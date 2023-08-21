@@ -11,10 +11,10 @@
 #' @author Michal Burda
 #' @export
 #' @examples
-#' aggreg_count(c(F,F,T,T,T), level = 1)           # 3
-#' aggreg_count(c(F,F,T,T,T), level = "FALSE")     # 2
-#' aggreg_count(c("b", "a", "a"), level = "a")     # 2
-#' aggreg_count(c(NA, "b", "a", "a"), level = NA)  # 1
+#' aggreg_count(c(FALSE, FALSE ,TRUE, TRUE, TRUE), level = 1)          # 3
+#' aggreg_count(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")    # 2
+#' aggreg_count(c("b", "a", "a"), level = "a")                         # 2
+#' aggreg_count(c(NA, "b", "a", "a"), level = NA)                      # 1
 aggreg_count <- function(x, level = 1) {
     .must_be_atomic_vector(x)
     ..must_be_type(function(a) is_scalar_integerish(a) ||

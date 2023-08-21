@@ -24,10 +24,10 @@ The relative number of occurences of \code{level} in \code{x}, i.e., the fractio
 The function returns the relative number (percentage) of occurences of \code{level} in vector \code{x}.
 }
 \examples{
-aggreg_percent(c(F,F,T,T,T), level = 1)                          # 3/5
-aggreg_percent(c(F,F,T,T,T), level = "FALSE")                    # 2/5
-aggreg_percent(c("b", "a", "a"), level = "a")                    # 2/3
-aggreg_percent(c(NA, "b", "a", "a"), level = NA, use_na = TRUE)  # 1/4
+aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = 1)        # 3/5
+aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")  # 2/5
+aggreg_percent(c("b", "a", "a"), level = "a")                       # 2/3
+aggreg_percent(c(NA, "b", "a", "a"), level = NA, use_na = TRUE)     # 1/4
 }
 \seealso{
 \code{\link[=aggreg_count]{aggreg_count()}}

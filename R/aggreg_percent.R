@@ -12,10 +12,10 @@
 #' @author Michal Burda
 #' @export
 #' @examples
-#' aggreg_percent(c(F,F,T,T,T), level = 1)                          # 3/5
-#' aggreg_percent(c(F,F,T,T,T), level = "FALSE")                    # 2/5
-#' aggreg_percent(c("b", "a", "a"), level = "a")                    # 2/3
-#' aggreg_percent(c(NA, "b", "a", "a"), level = NA, use_na = TRUE)  # 1/4
+#' aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = 1)        # 3/5
+#' aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")  # 2/5
+#' aggreg_percent(c("b", "a", "a"), level = "a")                       # 2/3
+#' aggreg_percent(c(NA, "b", "a", "a"), level = NA, use_na = TRUE)     # 1/4
 aggreg_percent <- function(x,
                            level = 1,
                            use_na = FALSE,

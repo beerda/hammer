@@ -20,10 +20,10 @@ The number of occurences of \code{level} in \code{x}
 The function returns the number of occurrences of \code{level} in vector \code{x}.
 }
 \examples{
-aggreg_count(c(F,F,T,T,T), level = 1)           # 3
-aggreg_count(c(F,F,T,T,T), level = "FALSE")     # 2
-aggreg_count(c("b", "a", "a"), level = "a")     # 2
-aggreg_count(c(NA, "b", "a", "a"), level = NA)  # 1
+aggreg_count(c(FALSE, FALSE ,TRUE, TRUE, TRUE), level = 1)          # 3
+aggreg_count(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")    # 2
+aggreg_count(c("b", "a", "a"), level = "a")                         # 2
+aggreg_count(c(NA, "b", "a", "a"), level = NA)                      # 1
 }
 \seealso{
 \code{\link[=aggreg_percent]{aggreg_percent()}}
