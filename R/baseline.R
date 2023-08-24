@@ -13,16 +13,6 @@
 }
 
 
-.create_test_based_aggreg <- function(test, thresh) {
-    function(x, ...) {
-        fit <- test(x)
-        aggreg <- if (fit$p.value < thresh) aggreg_median_iqr else aggreg_mean_sd
-
-        aggreg(x, ...)
-    }
-}
-
-
 #' Create baseline table from data frame
 #'
 #' Function works mainly for data frames grouped by [dplyr::group_by()]. In the
@@ -37,18 +27,9 @@
 #' @param .test if `TRUE`, an additional `"p"` column is created with p-values
 #' of appropriate statistical tests of significance of differences in groups
 #' @param .bullet a string used as a bullet in enumeration of factor levels
-#' @param .numeric_stat selection of the statistic to compute for numeric
-#' variables: `"robust"` (see [aggreg_median_iqr()]), `"parametric"` (see
-#' [aggreg_mean_sd()]), or `"test"`, which performs `.normality_test` first
-#' on each numeric variable to determine between `"robust"` and `"parametric"`
-#' @param .normality_test a function that performs the normality test in case of
-#' `.numeric_stat = "test"`. The function must return a list with the `"p.value"`
-#' element containing the p-value of the rejection of normality.
-#' @param .normality_thresh a p-value threshold below which will be the
-#' `.normality_test` interpreted as rejection of normality.
 #' @param .numeric_aggreg a custom function used to aggregate numeric values.
-#' If non-NULL then `.numeric_stat` is ignored.
 #' @param .categ_aggreg a custom function used to aggregate categorical values.
+#' @seealso [create_numeric_aggreg()]
 #' @export
 #' @author Michal Burda
 baseline <- function(.data,
@@ -56,26 +37,14 @@ baseline <- function(.data,
                      .all = TRUE,
                      .test = n_groups(.data) > 0,
                      .bullet = " \u2022 ",
-                     .numeric_stat = c("robust", "parametric", "test"),
-                     .normality_test = shapiro.test,
-                     .normality_thresh = 0.05,
-                     .numeric_aggreg = switch(.numeric_stat,
-                                              robust = aggreg_median_iqr,
-                                              parametric = aggreg_mean_sd,
-                                              test = .create_test_based_aggreg(.normality_test, .normality_thresh)),
+                     .numeric_aggreg = create_numeric_aggreg("robust"),
                      .categ_aggreg = aggreg_count_percent,
                      ...) {
-    .numeric_stat <- match.arg(.numeric_stat)
-
     .must_be_data_frame(.data)
     .must_be_flag(.n)
     .must_be_flag(.all)
     .must_be_flag(.test)
     .must_be_character_scalar(.bullet)
-    .must_be_character_scalar(.numeric_stat)
-    .must_be_double_scalar(.normality_thresh)
-    .must_be_function(.normality_test)
-    .must_be_in_range(.normality_thresh, c(0, 0.1))
     .must_be_function(.numeric_aggreg)
     .must_be_function(.categ_aggreg)
 

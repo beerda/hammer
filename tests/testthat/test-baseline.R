@@ -7,7 +7,7 @@ test_that("baseline test_numeric n/all", {
                     .n = TRUE,
                     .all = TRUE,
                     .bullet = " * ",
-                    .numeric_stat = "test")
+                    .numeric_aggreg = create_numeric_aggreg("test"))
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),
@@ -32,7 +32,7 @@ test_that("baseline parametric n/all", {
                     .n = TRUE,
                     .all = TRUE,
                     .bullet = " * ",
-                    .numeric_stat = "parametric")
+                    .numeric_aggreg = create_numeric_aggreg("parametric"))
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),
@@ -57,7 +57,7 @@ test_that("baseline robust n/all", {
                     .n = TRUE,
                     .all = TRUE,
                     .bullet = " * ",
-                    .numeric_stat = "robust")
+                    .numeric_aggreg = create_numeric_aggreg("robust"))
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),
@@ -82,7 +82,7 @@ test_that("baseline robust !n/all", {
                     .n = FALSE,
                     .all = TRUE,
                     .bullet = " * ",
-                    .numeric_stat = "robust")
+                    .numeric_aggreg = create_numeric_aggreg("robust"))
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),
@@ -107,7 +107,7 @@ test_that("baseline robust n/!all", {
                     .n = TRUE,
                     .all = FALSE,
                     .bullet = " * ",
-                    .numeric_stat = "robust")
+                    .numeric_aggreg = create_numeric_aggreg("robust"))
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),

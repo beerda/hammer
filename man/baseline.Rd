@@ -10,11 +10,7 @@ baseline(
   .all = TRUE,
   .test = n_groups(.data) > 0,
   .bullet = " • ",
-  .numeric_stat = c("robust", "parametric", "test"),
-  .normality_test = shapiro.test,
-  .normality_thresh = 0.05,
-  .numeric_aggreg = switch(.numeric_stat, robust = aggreg_median_iqr, parametric =
-    aggreg_mean_sd, test = .create_test_based_aggreg(.normality_test, .normality_thresh)),
+  .numeric_aggreg = create_numeric_aggreg("robust"),
   .categ_aggreg = aggreg_count_percent,
   ...
 )
@@ -33,20 +29,7 @@ of appropriate statistical tests of significance of differences in groups}
 
 \item{.bullet}{a string used as a bullet in enumeration of factor levels}
 
-\item{.numeric_stat}{selection of the statistic to compute for numeric
-variables: \code{"robust"} (see \code{\link[=aggreg_median_iqr]{aggreg_median_iqr()}}), \code{"parametric"} (see
-\code{\link[=aggreg_mean_sd]{aggreg_mean_sd()}}), or \code{"test"}, which performs \code{.normality_test} first
-on each numeric variable to determine between \code{"robust"} and \code{"parametric"}}
-
-\item{.normality_test}{a function that performs the normality test in case of
-\code{.numeric_stat = "test"}. The function must return a list with the \code{"p.value"}
-element containing the p-value of the rejection of normality.}
-
-\item{.normality_thresh}{a p-value threshold below which will be the
-\code{.normality_test} interpreted as rejection of normality.}
-
-\item{.numeric_aggreg}{a custom function used to aggregate numeric values.
-If non-NULL then \code{.numeric_stat} is ignored.}
+\item{.numeric_aggreg}{a custom function used to aggregate numeric values.}
 
 \item{.categ_aggreg}{a custom function used to aggregate categorical values.}
 }
@@ -54,6 +37,9 @@ If non-NULL then \code{.numeric_stat} is ignored.}
 Function works mainly for data frames grouped by \code{\link[dplyr:group_by]{dplyr::group_by()}}. In the
 resulting data frame, each column corresponds to a group and each row
 corresponds to a non-grouping column of the original data frame.
+}
+\seealso{
+\code{\link[=create_numeric_aggreg]{create_numeric_aggreg()}}
 }
 \author{
 Michal Burda
