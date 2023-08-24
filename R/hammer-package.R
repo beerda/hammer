@@ -46,6 +46,8 @@
 #' @importFrom stats quantile
 #' @importFrom stats sd
 #' @importFrom stats shapiro.test
+#' @importFrom stats t.test
+#' @importFrom stats wilcox.test
 #' @importFrom vctrs list_of
 ## usethis namespace: end
 NULL
