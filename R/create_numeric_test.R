@@ -1,3 +1,21 @@
+#' Factory function for creation of test function for numeric vectors
+#'
+#' Function creates a function for statistical testing of numeric vectors
+#' by groups. It creates three types of test functions: robust, parametric,
+#' or test-based accordingly to the `type` argument.
+#'
+#' @param type selection of the type of statistical test for numeric
+#'      variables: `"robust"` (see [test_wilcox()] or [test_kruskal()]),
+#'      `"parametric"` (see [test_t()] or [test_aov()]), or `"test"`, which
+#'      performs `.normality_test` first on the numeric variable to select from
+#'      `"robust"` and `"parametric"`
+#' @param normality_test a function that performs the normality test in case of
+#'      `type = "test"`. The function must return a list with the `"p.value"`
+#'      element containing the p-value of the rejection of normality.
+#' @param normality_thresh a p-value threshold below which will be the
+#'      `normality_test` interpreted as rejection of normality.
+#' @return A test function
+#' @seealso [test_t()], [test_wilcox()], [test_kruskal()], [test_aov()]
 #'
 #' @return a test function
 #' @author Michal Burda
