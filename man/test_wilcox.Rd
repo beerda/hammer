@@ -4,12 +4,12 @@
 \alias{test_wilcox}
 \title{Return p-value of the two-sample Wilcoxon rank sum test}
 \usage{
-test_wilcox(x, y, ...)
+test_wilcox(x, g, ...)
 }
 \arguments{
-\item{x}{values of the first sample}
+\item{x}{numeric values}
 
-\item{y}{values of the second sample}
+\item{g}{grouping factor (must contain 2 levels)}
 
 \item{...}{further parameters passed to the underlying \code{\link[=wilcox.test]{wilcox.test()}} function}
 }
