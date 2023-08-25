@@ -95,6 +95,7 @@
 .must_be_integer_vector <- ..must_be_type(is_integer, "integer vector")
 .must_be_integerish_vector <- ..must_be_type(is_integerish, "integerish vector")
 .must_be_numeric_vector <- ..must_be_type(is.numeric, "numeric vector")
+.must_be_character_vector <- ..must_be_type(is.character, "character vector")
 .must_be_factor <- ..must_be_type(is.factor, "factor")
 .must_be_matrix <- ..must_be_type(is.matrix, "matrix")
 .must_be_function <- ..must_be_type(is.function, "function")
