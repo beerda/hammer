@@ -1,15 +1,18 @@
 #'
-#' @return
+#' @return a test function
 #' @author Michal Burda
 #' @export
 create_numeric_test <- function(type = c("robust", "parametric", "test"),
-                                parametric_test = test_t,
-                                robust_test = test_wilcox,
+                                k = 2,
+                                parametric_test = if (k > 2) test_aov else test_t,
+                                robust_test = if (k > 2) test_kruskal else test_wilcox,
                                 normality_test = shapiro.test,
                                 normality_thresh = 0.05) {
     type <- match.arg(type)
 
     .must_be_character_scalar(type)
+    .must_be_integerish_scalar(k)
+    .must_be_greater(k, 1)
     .must_be_function(normality_test)
     .must_be_function(parametric_test)
     .must_be_function(robust_test)
