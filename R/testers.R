@@ -105,6 +105,7 @@
 .must_be_list_of_logicals <- ..must_be_list_of(is.logical, "logical vectors")
 .must_be_list_of_doubles <- ..must_be_list_of(is.double, "double (numeric) vectors")
 .must_be_list_of_characters <- ..must_be_list_of(is.character, "character vectors")
+.must_be_list_of_functions <- ..must_be_list_of(is.function, "functions")
 
 .must_be_finite <- ..must_be_value(is.finite, "finite")
 .must_be_greater <- ..must_be_comparable(`>`, ">")
