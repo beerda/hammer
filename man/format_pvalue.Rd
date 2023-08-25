@@ -19,6 +19,13 @@ format_pvalue(
 
 \item{digits}{the number of decimal point numbers to round the numbers to}
 
+\item{thresh}{a value greater than this threshold is considered as
+non-significant}
+
+\item{varname}{if \code{""} then simply formatted p-values are returned. If
+\code{varname} contains some string, then the result is formatted as
+\code{"varname = value"}}
+
 \item{ns}{the string used for non-significant values}
 
 \item{na}{the string to be used for \code{NA} values}

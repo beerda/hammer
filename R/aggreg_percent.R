@@ -3,11 +3,12 @@
 #' The function returns the relative number (percentage) of occurences of `level` in vector `x`.
 #' @param x the vector to compute the occurences of `level` in. It must be an atomic vector.
 #' @param level the level to be computed. It could be either integerish value or a string or `NA`.
-#' The integerish value is treated as the index of level to be counted, character value selects
-#' the level to be counted by its name, and `NA` selects missing values to be counted.
+#'      The integerish value is treated as the index of level to be counted, character value selects
+#'      the level to be counted by its name, and `NA` selects missing values to be counted.
 #' @param use_na if `FALSE` then `NA` values are omitted prior computing the frequency.
 #' @param ... further arguments passed to [format_percent()]
-#' @return The relative number of occurences of `level` in `x`, i.e., the fraction in [0,1].
+#' @return The relative number of occurences of `level` in `x`, i.e., the fraction number
+#'      in the interval from 0 to 1.
 #' @seealso [aggreg_count()]
 #' @author Michal Burda
 #' @export

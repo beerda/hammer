@@ -20,6 +20,15 @@ variables: \code{"robust"} (see \code{\link[=test_wilcox]{test_wilcox()}} or \co
 performs \code{.normality_test} first on the numeric variable to select from
 \code{"robust"} and \code{"parametric"}}
 
+\item{k}{the number of groups for which the test will be performed. The value
+must be greater than 1. If \code{k} equals \code{2}, two-sample tests are returned
+(either \code{\link[=test_t]{test_t()}} or \code{\link[=test_wilcox]{test_wilcox()}}). For \code{k} greater than \code{2}, either
+\code{\link[=test_aov]{test_aov()}} or \code{\link[=test_kruskal]{test_kruskal()}} is returned.}
+
+\item{parametric_test}{which test to use as a parametric one}
+
+\item{robust_test}{which test to use as a robust one}
+
 \item{normality_test}{a function that performs the normality test in case of
 \code{type = "test"}. The function must return a list with the \code{"p.value"}
 element containing the p-value of the rejection of normality.}

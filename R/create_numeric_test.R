@@ -9,6 +9,12 @@
 #'      `"parametric"` (see [test_t()] or [test_aov()]), or `"test"`, which
 #'      performs `.normality_test` first on the numeric variable to select from
 #'      `"robust"` and `"parametric"`
+#' @param k the number of groups for which the test will be performed. The value
+#'      must be greater than 1. If `k` equals `2`, two-sample tests are returned
+#'      (either [test_t()] or [test_wilcox()]). For `k` greater than `2`, either
+#'      [test_aov()] or [test_kruskal()] is returned.
+#' @param parametric_test which test to use as a parametric one
+#' @param robust_test which test to use as a robust one
 #' @param normality_test a function that performs the normality test in case of
 #'      `type = "test"`. The function must return a list with the `"p.value"`
 #'      element containing the p-value of the rejection of normality.

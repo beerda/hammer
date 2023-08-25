@@ -18,6 +18,10 @@ variables: \code{"robust"} (see \code{\link[=aggreg_median_iqr]{aggreg_median_iq
 \code{\link[=aggreg_mean_sd]{aggreg_mean_sd()}}), or \code{"test"}, which performs \code{.normality_test} first
 on each numeric variable to determine between \code{"robust"} and \code{"parametric"}}
 
+\item{parametric_aggreg}{which aggregator to use as a parametric one}
+
+\item{robust_aggreg}{which aggregator to use as a robust one}
+
 \item{normality_test}{a function that performs the normality test in case of
 \code{type = "test"}. The function must return a list with the \code{"p.value"}
 element containing the p-value of the rejection of normality.}

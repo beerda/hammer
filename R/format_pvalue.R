@@ -13,11 +13,15 @@
 #'
 #' @param x the numeric vector to be converted
 #' @param digits the number of decimal point numbers to round the numbers to
+#' @param thresh a value greater than this threshold is considered as
+#'      non-significant
+#' @param varname if `""` then simply formatted p-values are returned. If
+#'      `varname` contains some string, then the result is formatted as
+#'      `"varname = value"`
 #' @param ns the string used for non-significant values
 #' @param na the string to be used for `NA` values
 #' @param ... further arguments that are ignored
 #' @returns a character vector of transformed numeric values
-#'
 #' @export
 #' @author Michal Burda
 format_pvalue <- function(x,

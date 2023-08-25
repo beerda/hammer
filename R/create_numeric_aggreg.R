@@ -8,6 +8,8 @@
 #'      variables: `"robust"` (see [aggreg_median_iqr()]), `"parametric"` (see
 #'      [aggreg_mean_sd()]), or `"test"`, which performs `.normality_test` first
 #'      on each numeric variable to determine between `"robust"` and `"parametric"`
+#' @param parametric_aggreg which aggregator to use as a parametric one
+#' @param robust_aggreg which aggregator to use as a robust one
 #' @param normality_test a function that performs the normality test in case of
 #'      `type = "test"`. The function must return a list with the `"p.value"`
 #'      element containing the p-value of the rejection of normality.

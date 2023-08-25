@@ -18,7 +18,8 @@ the level to be counted by its name, and \code{NA} selects missing values to be 
 \item{...}{further arguments passed to \code{\link[=format_percent]{format_percent()}}}
 }
 \value{
-The relative number of occurences of \code{level} in \code{x}, i.e., the fraction in \link{0,1}.
+The relative number of occurences of \code{level} in \code{x}, i.e., the fraction number
+in the interval from 0 to 1.
 }
 \description{
 The function returns the relative number (percentage) of occurences of \code{level} in vector \code{x}.
