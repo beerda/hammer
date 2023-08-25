@@ -30,17 +30,20 @@
 
 ..must_be_list_of <- function(f, msg) {
     function(x,
+             null = FALSE,
              name = deparse(substitute(x)),
              call = caller_env()) {
-        .must_be_list(x, name, call)
-        test <- sapply(x, f)
-        if (!isTRUE(all(test))) {
-            types <- sapply(x, function(i) class(i)[1])
-            details <- paste0("Element ", seq_along(types), " is a {.cls ", types, "}.")
-            details <- details[!test]
-            cli_abort(c("{.var {name}} must be a list of {msg}.",
-                        ..error_details(details)),
-                      call = call)
+        .must_be_list(x, null = null, name, call)
+        if (!is.null(x)) {
+            test <- sapply(x, f)
+            if (!isTRUE(all(test))) {
+                types <- sapply(x, function(i) class(i)[1])
+                details <- paste0("Element ", seq_along(types), " is a {.cls ", types, "}.")
+                details <- details[!test]
+                cli_abort(c("{.var {name}} must be a list of {msg}.",
+                            ..error_details(details)),
+                          call = call)
+            }
         }
     }
 }
