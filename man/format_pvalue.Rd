@@ -4,14 +4,26 @@
 \alias{format_pvalue}
 \title{Convert the numeric vector of p-values to formatted character vector}
 \usage{
-format_pvalue(x, digits = 4, thresh = 0.05, varname = "", ns = "NS", na = "NA")
+format_pvalue(
+  x,
+  digits = 4,
+  thresh = 0.05,
+  varname = "",
+  ns = "NS",
+  na = "NA",
+  ...
+)
 }
 \arguments{
 \item{x}{the numeric vector to be converted}
 
 \item{digits}{the number of decimal point numbers to round the numbers to}
 
+\item{ns}{the string used for non-significant values}
+
 \item{na}{the string to be used for \code{NA} values}
+
+\item{...}{further arguments that are ignored}
 }
 \value{
 a character vector of transformed numeric values

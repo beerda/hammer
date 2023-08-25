@@ -4,6 +4,7 @@
 #' @param sep the separator string that will be placed between the `x` vector values
 #' @param max the maximum number of values from `x` to be placed into the string
 #' @param dots the string appended to the result if the `x` vector is larger than `max`
+#' @param ... further arguments that are ignored
 #' @return The string with concatenated values from `x`
 #'
 #' @author Michal Burda
@@ -11,7 +12,8 @@
 format_enumeration <- function(x,
                                sep = ", ",
                                max = 5,
-                               dots = "...") {
+                               dots = "...",
+                               ...) {
     .must_be_atomic_vector(x)
     .must_be_character_scalar(sep)
     .must_be_integerish_scalar(max)

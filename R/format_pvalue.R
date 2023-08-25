@@ -13,7 +13,9 @@
 #'
 #' @param x the numeric vector to be converted
 #' @param digits the number of decimal point numbers to round the numbers to
+#' @param ns the string used for non-significant values
 #' @param na the string to be used for `NA` values
+#' @param ... further arguments that are ignored
 #' @returns a character vector of transformed numeric values
 #'
 #' @export
@@ -23,7 +25,8 @@ format_pvalue <- function(x,
                           thresh = 0.05,
                           varname = "",
                           ns = "NS",
-                          na = "NA") {
+                          na = "NA",
+                          ...) {
     .must_be_numeric_vector(x)
     .must_be_integerish_scalar(digits)
     .must_be_greater_eq(digits, 0)

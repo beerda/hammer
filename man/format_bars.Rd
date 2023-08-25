@@ -5,7 +5,7 @@
 \title{Convert the data into strings reporting relative frequencies in the form of
 textual bar-chart}
 \usage{
-format_bars(p, n, width = 20, symbol = "I", fill = "-")
+format_bars(p, n, width = 20, symbol = "I", fill = "-", ...)
 }
 \arguments{
 \item{p}{an integerish vector of positive cases.}
@@ -18,6 +18,8 @@ of \code{symbol} repeats)}
 \item{symbol}{the character string used to plot the bar}
 
 \item{fill}{the character string used to fill the empty part of the chart}
+
+\item{...}{further arguments that are ignored}
 }
 \value{
 a character vector of bars created from \code{symbol} that depict the

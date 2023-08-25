@@ -11,6 +11,7 @@
 #' of `symbol` repeats)
 #' @param symbol the character string used to plot the bar
 #' @param fill the character string used to fill the empty part of the chart
+#' @param ... further arguments that are ignored
 #'
 #' @returns a character vector of bars created from `symbol` that depict the
 #' relative frequency of `p`s in `n`s
@@ -21,7 +22,8 @@ format_bars <- function(p,
                         n,
                         width = 20,
                         symbol = "I",
-                        fill = "-") {
+                        fill = "-",
+                        ...) {
     .must_be_integerish_vector(p)
     .must_be_integerish_vector(n)
     .must_be_greater_eq(p, 0)

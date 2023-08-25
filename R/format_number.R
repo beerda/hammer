@@ -3,13 +3,15 @@
 #' @param x the numeric vector to be converted
 #' @param digits the number of decimal point numbers to round the numbers to
 #' @param na the string to be used for `NA` values
+#' @param ... further arguments that are ignored
 #' @returns a character vector of transformed numeric values
 #'
 #' @author Michal Burda
 #' @export
 format_number <- function(x,
                           digits = 2,
-                          na = "NA") {
+                          na = "NA",
+                          ...) {
   .must_be_numeric_vector(x)
   .must_be_integerish_scalar(digits)
   .must_be_greater_eq(digits, 0)

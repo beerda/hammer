@@ -4,7 +4,7 @@
 \alias{format_enumeration}
 \title{Convert the character vector to a string of enumerated values.}
 \usage{
-format_enumeration(x, sep = ", ", max = 5, dots = "...")
+format_enumeration(x, sep = ", ", max = 5, dots = "...", ...)
 }
 \arguments{
 \item{x}{the character vector to be converted}
@@ -14,6 +14,8 @@ format_enumeration(x, sep = ", ", max = 5, dots = "...")
 \item{max}{the maximum number of values from \code{x} to be placed into the string}
 
 \item{dots}{the string appended to the result if the \code{x} vector is larger than \code{max}}
+
+\item{...}{further arguments that are ignored}
 }
 \value{
 The string with concatenated values from \code{x}

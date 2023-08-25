@@ -4,7 +4,7 @@
 \alias{format_number}
 \title{Convert the numeric vector to character vector}
 \usage{
-format_number(x, digits = 2, na = "NA")
+format_number(x, digits = 2, na = "NA", ...)
 }
 \arguments{
 \item{x}{the numeric vector to be converted}
@@ -12,6 +12,8 @@ format_number(x, digits = 2, na = "NA")
 \item{digits}{the number of decimal point numbers to round the numbers to}
 
 \item{na}{the string to be used for \code{NA} values}
+
+\item{...}{further arguments that are ignored}
 }
 \value{
 a character vector of transformed numeric values
