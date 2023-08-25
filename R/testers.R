@@ -3,7 +3,7 @@
              null = FALSE,
              name = deparse(substitute(x)),
              call = caller_env()) {
-        if (!isTRUE(f(x) | (null && is.null(x)))) {
+        if (!isTRUE(f(x) | (isTRUE(null) && is.null(x)))) {
             na <- if (all(is.na(x))) " NA" else ""
             msg <- if (null) paste(msg, "or NULL") else msg
             cli_abort(c("{.var {name}} must be a {msg}.",
