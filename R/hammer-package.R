@@ -34,6 +34,7 @@
 #' @importFrom ggplot2 ylim
 #' @importFrom graphics boxplot
 #' @importFrom grDevices nclass.Sturges
+#' @importFrom rlang .data
 #' @importFrom rlang caller_env
 #' @importFrom rlang is_integer
 #' @importFrom rlang is_integerish

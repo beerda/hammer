@@ -23,7 +23,7 @@ histogram <- function(x,
     g <- ggplot(d) +
         aes(x = x) +
         geom_histogram(bins = bins, colour = "black", fill = "white") +
-        geom_density(aes(y = binwidth * after_stat(count)))
+        geom_density(aes(y = binwidth * after_stat(.data$count)))
 
     if (nrow(d) > 0) {
         space <- 0.35
@@ -53,7 +53,7 @@ histogram <- function(x,
         if (nrow(outs) > 0) {
             g <- g +
                 geom_point(data = outs,
-                           mapping = aes(x = o, y = bcenter))
+                           mapping = aes(x = .data$o, y = bcenter))
         }
         if (rugs) {
             g <- g +

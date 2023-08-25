@@ -17,9 +17,13 @@ freq_plot <- function(x,
   lim <- max(table(d$x))
 
   g <- ggplot(d) +
-      aes(y = x, x = after_stat(count)) +
+      aes(y = x,
+          x = after_stat(.data$count)) +
       geom_bar() +
-      geom_text(aes(label = after_stat(paste0(count, ' (', round(100 * count / sum(count)), ' %)'))),
+      geom_text(aes(label = after_stat(paste0(.data$count,
+                                              ' (',
+                                              round(100 * .data$count / sum(.data$count)),
+                                              ' %)'))),
                 hjust =  -0.2,
                 stat = 'count',
                 color = "black",
