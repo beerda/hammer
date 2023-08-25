@@ -9,7 +9,25 @@
             return(do.call(handlers[[cl]], c(list(x), dots)))
         }
     }
-    return('')
+
+    return("")
+}
+
+
+.tester <- function(var,
+                    data,
+                    g,
+                    dots,
+                    handlers) {
+    if (var %in% colnames(data)) {
+        x <- data[[var]]
+        cl <- class(x)
+        if (is.function(handlers[[cl]])) {
+            return(do.call(handlers[[cl]], c(list(x, g), dots)))
+        }
+    }
+
+    return(NA_real_)
 }
 
 
@@ -36,17 +54,23 @@ baseline <- function(.data,
                      .n = TRUE,
                      .all = TRUE,
                      .test = n_groups(.data) > 0,
+                     .type = c("robust", "parametric", "test"),
                      .bullet = " \u2022 ",
-                     .numeric_aggreg = create_numeric_aggreg("robust"),
-                     .categ_aggreg = aggreg_count_percent,
+                     .numeric_aggreg = NULL,
+                     .categ_aggreg = NULL,
+                     .numeric_test = NULL,
+                     .categ_test = test_fisher,
                      ...) {
+    .type <- match.arg(.type)
+
     .must_be_data_frame(.data)
     .must_be_flag(.n)
     .must_be_flag(.all)
     .must_be_flag(.test)
     .must_be_character_scalar(.bullet)
-    .must_be_function(.numeric_aggreg)
-    .must_be_function(.categ_aggreg)
+    .must_be_character_scalar(.type)
+    .must_be_function(.numeric_aggreg, null = TRUE)
+    .must_be_function(.categ_aggreg, null = TRUE)
 
     groups <- NULL
     if (n_groups(.data) > 0) {
@@ -59,8 +83,8 @@ baseline <- function(.data,
         }
     }
 
-    origGroups <- groups
-    origData <- .data
+    orig_groups <- groups
+    orig_data <- .data
     dots <- list(...)
     vars <- colnames(.data)
     mastervars <- vars
@@ -99,14 +123,23 @@ baseline <- function(.data,
 
     res <- data.frame(name=labs, stringsAsFactors=FALSE)
 
-    handlers <- list(numeric=.numeric_aggreg,
-                     integer=.numeric_aggreg,
-                     logical=.categ_aggreg,
-                     factor=.categ_aggreg)
+    if (is.null(.numeric_aggreg)) {
+        .numeric_aggreg <- create_numeric_aggreg(.type)
+    }
+    if (is.null(.categ_aggreg)) {
+        .categ_aggreg <- aggreg_count_percent
+    }
+
+    handlers <- list(numeric = .numeric_aggreg,
+                     integer = .numeric_aggreg,
+                     logical = .categ_aggreg,
+                     factor = .categ_aggreg)
 
     for (g in names(groups)) {
         subdata <- .data[groups[[g]], ]
-        res[[g]] <- vapply(vars, .aggregator, character(1),
+        res[[g]] <- vapply(vars,
+                           .aggregator,
+                           character(1),
                            subdata, dots, handlers,
                            USE.NAMES=FALSE)
     }
@@ -115,20 +148,31 @@ baseline <- function(.data,
         counts <- sapply(groups, length)
         row <- res[NA, ][1, ]
         row[1, names(counts)] <- counts
-        row[1, 'name'] <- 'N'
+        row[1, "name"] <- "N"
         res <- rbind(row, res)
         mastervars <- c(NA, mastervars)
     }
 
-#    if (.test) {
-#        if (length(origGroups) != 2) {
-#            stop('groups of length 2 supported only (two-sample tests)')
-#        }
-#        pvals <- vapply(as.character(colnames(origData)), .test, numeric(1),
-#                        origData, origGroups, dots)
-#        pvals <- rearrange(pvals, by=mastervars)
-#        res[['p-value']] <- formatPvalue(pvals, na='')
-#    }
+    if (.test) {
+        if (is.null(.numeric_test)) {
+            .numeric_test <- create_numeric_test(.type, k = length(orig_groups))
+        }
+        if (is.null(.categ_test)) {
+            .categ_test <- test_fisher
+        }
+
+        handlers <- list(numeric = .numeric_test,
+                         integer = .numeric_test,
+                         logical = .categ_test,
+                         factor = .categ_test)
+
+        pvals <- vapply(as.character(colnames(orig_data)),
+                        .tester,
+                        numeric(1),
+                        orig_data, factor(group_indices(orig_data)), dots, handlers)
+        pvals <- rearrange(pvals, by = mastervars)
+        res[['p-value']] <- format_pvalue(pvals, na = "")
+    }
 
     rownames(res) <- NULL
     res

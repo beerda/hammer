@@ -6,8 +6,10 @@ test_that("baseline test_numeric n/all", {
     res <- baseline(d,
                     .n = TRUE,
                     .all = TRUE,
+                    .test = FALSE,
                     .bullet = " * ",
-                    .numeric_aggreg = create_numeric_aggreg("test"))
+                    .numeric_aggreg = create_numeric_aggreg("test"),
+                    exact = FALSE)
 
     expect_true(is.data.frame(res))
     expect_equal(colnames(res),
@@ -31,6 +33,7 @@ test_that("baseline parametric n/all", {
     res <- baseline(d,
                     .n = TRUE,
                     .all = TRUE,
+                    .test = FALSE,
                     .bullet = " * ",
                     .numeric_aggreg = create_numeric_aggreg("parametric"))
 
@@ -56,6 +59,7 @@ test_that("baseline robust n/all", {
     res <- baseline(d,
                     .n = TRUE,
                     .all = TRUE,
+                    .test = FALSE,
                     .bullet = " * ",
                     .numeric_aggreg = create_numeric_aggreg("robust"))
 
@@ -81,6 +85,7 @@ test_that("baseline robust !n/all", {
     res <- baseline(d,
                     .n = FALSE,
                     .all = TRUE,
+                    .test = FALSE,
                     .bullet = " * ",
                     .numeric_aggreg = create_numeric_aggreg("robust"))
 
@@ -106,6 +111,7 @@ test_that("baseline robust n/!all", {
     res <- baseline(d,
                     .n = TRUE,
                     .all = FALSE,
+                    .test = FALSE,
                     .bullet = " * ",
                     .numeric_aggreg = create_numeric_aggreg("robust"))
 
@@ -118,4 +124,32 @@ test_that("baseline robust n/!all", {
                  c("3", "2.00 (1.50 -- 2.50)", "", "1 (33.33 %)", "2 (66.67 %)"))
     expect_equal(res$y,
                  c("2", "4.50 (4.25 -- 4.75)", "", "1 (50.00 %)", "1 (50.00 %)"))
+})
+
+
+test_that("baseline pvalues", {
+    set.seed(333)
+    n <- 30
+    d <- data.frame(p = c(rnorm(n, 1, 3), rnorm(n, 10, 5)),
+                    q = rnorm(2 * n),
+                    g = factor(c(rep("a", n), rep("b", n))))
+    d <- group_by(d, g)
+    res <- baseline(d,
+                    .n = FALSE,
+                    .all = FALSE,
+                    .test = TRUE,
+                    .type = "parametric",
+                    .bullet = " * ")
+
+    expect_true(is.data.frame(res))
+    expect_equal(colnames(res),
+                 c("name", "a", "b", "p-value"))
+    expect_equal(res$name,
+                 c("p", "q"))
+    expect_equal(res$a,
+                 c("0.94 ± 3.08", "-0.17 ± 1.00"))
+    expect_equal(res$b,
+                 c("10.23 ± 4.41", "0.13 ± 0.87"))
+    expect_equal(res$`p-value`,
+                 c("<0.0001", "NS"))
 })

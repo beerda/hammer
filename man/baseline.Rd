@@ -9,9 +9,12 @@ baseline(
   .n = TRUE,
   .all = TRUE,
   .test = n_groups(.data) > 0,
+  .type = c("robust", "parametric", "test"),
   .bullet = " • ",
-  .numeric_aggreg = create_numeric_aggreg("robust"),
-  .categ_aggreg = aggreg_count_percent,
+  .numeric_aggreg = NULL,
+  .categ_aggreg = NULL,
+  .numeric_test = NULL,
+  .categ_test = test_fisher,
   ...
 )
 }
