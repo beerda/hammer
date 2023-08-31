@@ -73,7 +73,7 @@ baseline <- function(.data,
     .must_be_function(.categ_aggreg, null = TRUE)
 
     groups <- NULL
-    if (n_groups(.data) > 0) {
+    if (n_groups(.data) > 1) {
         groups <- group_rows(.data)
         names(groups) <- Reduce(function(...) paste(..., sep='/'),
                                 group_keys(.data))

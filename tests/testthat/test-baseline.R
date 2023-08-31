@@ -153,3 +153,26 @@ test_that("baseline pvalues", {
     expect_equal(res$`p-value`,
                  c("<0.0001", "NS"))
 })
+
+
+test_that("baseline without grouping", {
+    set.seed(333)
+    n <- 30
+    d <- data.frame(p = c(rnorm(n, 1, 3), rnorm(n, 10, 5)),
+                    q = rnorm(2 * n),
+                    g = factor(c(rep("a", n), rep("b", n))))
+    res <- baseline(d,
+                    .n = TRUE,
+                    .all = TRUE,
+                    .test = FALSE,
+                    .type = "parametric",
+                    .bullet = " * ")
+
+    expect_true(is.data.frame(res))
+    expect_equal(colnames(res),
+                 c("name", "all"))
+    expect_equal(res$name,
+                 c("N", "p", "q", "g:", " * a", " * b"))
+    expect_equal(res$all,
+                 c("60", "5.59 ± 6.01", "-0.02 ± 0.94", "", "30 (50.00 %)", "30 (50.00 %)"))
+})
