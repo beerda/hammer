@@ -21,7 +21,7 @@ freq_plot <- function(x,
     g <- ggplot(d) +
         aes(y = x,
             x = after_stat(.data$count)) +
-        geom_bar() +
+        geom_bar(colour = "black", fill = "gray") +
         geom_text(aes(label = after_stat(paste0(.data$count,
                                                 ' (',
                                                 round(100 * .data$count / sum(.data$count)),
