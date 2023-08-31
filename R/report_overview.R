@@ -1,7 +1,6 @@
-#"
-#" @return
-#" @author Michal Burda
-#" @export
+#'
+#' @author Michal Burda
+#' @export
 report_overview <- function(.data) {
     .must_be_data_frame(.data)
 
