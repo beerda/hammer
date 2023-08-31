@@ -22,7 +22,7 @@ format_bars <- function(p,
                         n,
                         width = 20,
                         symbol = "I",
-                        fill = "-",
+                        fill = " ",
                         ...) {
     .must_be_integerish_vector(p)
     .must_be_integerish_vector(n)
