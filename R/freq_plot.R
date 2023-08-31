@@ -28,8 +28,9 @@ freq_plot <- function(x,
                 stat = 'count',
                 color = "black",
                 size = 3) +
-      scale_x_continuous(expand = c(0, 0),
-                         limits = c(NA, lim * 1.15)) +
+      #scale_x_continuous(expand = c(0, 0),
+                         #limits = c(NA, lim * 1.15)) +
+      scale_x_continuous(expand = expansion(mult = c(0, 0.35))) +
       ylab(name)
 
   g
