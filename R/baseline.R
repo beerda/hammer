@@ -55,6 +55,7 @@ baseline <- function(.data,
                      .all = TRUE,
                      .test = n_groups(.data) > 1,
                      .type = c("robust", "parametric", "test"),
+                     .labels = labels(.data)[[2]],
                      .bullet = " \u2022 ",
                      .numeric_aggreg = NULL,
                      .categ_aggreg = NULL,
@@ -88,8 +89,7 @@ baseline <- function(.data,
     dots <- list(...)
     vars <- colnames(.data)
     mastervars <- vars
-    labs <- labels(.data)[[2]]
-    labs[is.na(labs)] <- colnames(.data)[is.na(labs)]
+    labs <- .labels
 
     gi <- !(vars %in% colnames(group_keys(.data)))
     vars <- vars[gi]
