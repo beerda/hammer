@@ -4,7 +4,7 @@
                         handlers) {
     if (var %in% colnames(subdata)) {
         x <- subdata[[var]]
-        cl <- class(x)
+        cl <- class(x)[1]
         if (is.function(handlers[[cl]])) {
             return(do.call(handlers[[cl]], c(list(x), dots)))
         }
@@ -21,7 +21,7 @@
                     handlers) {
     if (var %in% colnames(data)) {
         x <- data[[var]]
-        cl <- class(x)
+        cl <- class(x)[1]
         if (is.function(handlers[[cl]])) {
             return(do.call(handlers[[cl]], c(list(x, g), dots)))
         }
@@ -53,7 +53,7 @@
 baseline <- function(.data,
                      .n = TRUE,
                      .all = TRUE,
-                     .test = n_groups(.data) > 0,
+                     .test = n_groups(.data) > 1,
                      .type = c("robust", "parametric", "test"),
                      .bullet = " \u2022 ",
                      .numeric_aggreg = NULL,
