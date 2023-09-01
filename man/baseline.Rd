@@ -32,11 +32,33 @@ statistics of the whole data frame}
 \item{.test}{if \code{TRUE}, an additional \code{"p"} column is created with p-values
 of appropriate statistical tests of significance of differences in groups}
 
+\item{.type}{the type of statistic to use for numeric data is used to set
+the default for \code{.numeric_aggreg} or \code{.numeric_test} argument if these
+are set to \code{NULL}. See \code{\link[=create_numeric_aggreg]{create_numeric_aggreg()}} or \code{\link[=create_numeric_test]{create_numeric_test()}}
+respectively.}
+
+\item{.labels}{a character vector of column labels (defaults to column names
+of \code{.data})}
+
 \item{.bullet}{a string used as a bullet in enumeration of factor levels}
 
-\item{.numeric_aggreg}{a custom function used to aggregate numeric values.}
+\item{.max_width}{a maximum width of variable names or factor levels provided
+in the first column of the result (formatted by \code{\link[=format_string]{format_string()}})}
 
-\item{.categ_aggreg}{a custom function used to aggregate categorical values.}
+\item{.numeric_aggreg}{a custom function used to aggregate numeric values.
+If \code{NULL}, \code{create_numeric_aggreg(.type)} is used to obtain the default.}
+
+\item{.categ_aggreg}{a custom function used to aggregate categorical values.
+If \code{NULL}, \code{\link[=aggreg_count_percent]{aggreg_count_percent()}} is used.}
+
+\item{.numeric_test}{a custom function used to provide p-value of the test on
+numeric columns. If \code{NULL}, \code{create_numeric_test(.type, k)} is used to
+obtain the default function where \code{k} is the number of groups of \code{.data}.}
+
+\item{.categ_test}{a custom function used to provide p-value of the test on
+categorical columns. If \code{NULL}, \code{\link[=test_fisher]{test_fisher()}} is used as a default.}
+
+\item{...}{further arguments passed to aggregating or testing functions.}
 }
 \description{
 Function works mainly for data frames grouped by \code{\link[dplyr:group_by]{dplyr::group_by()}}. In the
@@ -44,7 +66,7 @@ resulting data frame, each column corresponds to a group and each row
 corresponds to a non-grouping column of the original data frame.
 }
 \seealso{
-\code{\link[=create_numeric_aggreg]{create_numeric_aggreg()}}
+\code{\link[=create_numeric_aggreg]{create_numeric_aggreg()}}, \code{\link[=create_numeric_test]{create_numeric_test()}}
 }
 \author{
 Michal Burda

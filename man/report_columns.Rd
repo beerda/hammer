@@ -8,6 +8,9 @@ report_columns(.data, ...)
 }
 \arguments{
 \item{.data}{a data frame}
+
+\item{...}{other agruments passed to \code{\link[=format_count_percent]{format_count_percent()}},
+\code{\link[=format_interval]{format_interval()}} or \code{\link[=format_string]{format_string()}}}
 }
 \value{
 a description of columns as tibble

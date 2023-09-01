@@ -39,15 +39,31 @@
 #'
 #' @param .data the data frame to be processed
 #' @param .n if `TRUE`, the first row of the result has to contain number of rows
-#' in groups
+#'      in groups
 #' @param .all if `TRUE`, an additional `"all"` column is created containing
-#' statistics of the whole data frame
+#'      statistics of the whole data frame
 #' @param .test if `TRUE`, an additional `"p"` column is created with p-values
-#' of appropriate statistical tests of significance of differences in groups
+#'      of appropriate statistical tests of significance of differences in groups
+#' @param .type the type of statistic to use for numeric data is used to set
+#'      the default for `.numeric_aggreg` or `.numeric_test` argument if these
+#'      are set to `NULL`. See [create_numeric_aggreg()] or [create_numeric_test()]
+#'      respectively.
+#' @param .labels a character vector of column labels (defaults to column names
+#'      of `.data`)
 #' @param .bullet a string used as a bullet in enumeration of factor levels
+#' @param .max_width a maximum width of variable names or factor levels provided
+#'      in the first column of the result (formatted by [format_string()])
 #' @param .numeric_aggreg a custom function used to aggregate numeric values.
+#'      If `NULL`, `create_numeric_aggreg(.type)` is used to obtain the default.
 #' @param .categ_aggreg a custom function used to aggregate categorical values.
-#' @seealso [create_numeric_aggreg()]
+#'      If `NULL`, [aggreg_count_percent()] is used.
+#' @param .numeric_test a custom function used to provide p-value of the test on
+#'      numeric columns. If `NULL`, `create_numeric_test(.type, k)` is used to
+#'      obtain the default function where `k` is the number of groups of `.data`.
+#' @param .categ_test a custom function used to provide p-value of the test on
+#'      categorical columns. If `NULL`, [test_fisher()] is used as a default.
+#' @param ... further arguments passed to aggregating or testing functions.
+#' @seealso [create_numeric_aggreg()], [create_numeric_test()]
 #' @export
 #' @author Michal Burda
 baseline <- function(.data,
@@ -78,6 +94,12 @@ baseline <- function(.data,
     .must_be_function(.categ_aggreg, null = TRUE)
     .must_be_function(.numeric_test, null = TRUE)
     .must_be_function(.categ_test, null = TRUE)
+
+    if (length(.labels) != ncol(.data)) {
+        cli_abort(c("The length of {.var .labels} must be equal to the number of columns of {.var .data}.",
+                    "x" = "{.var data} has {ncol(data)} columns.",
+                    "x" = "{.var .labels} has {length(.labels)} elements."))
+    }
 
     groups <- NULL
     if (n_groups(.data) > 1) {

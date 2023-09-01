@@ -1,7 +1,9 @@
 #' Generate a table describing all columns in a data frame
 #'
 #' @param .data a data frame
-#' @return a description of columns as tibble
+#' @param ... other agruments passed to [format_count_percent()],
+#'      [format_interval()] or [format_string()]
+#' @returns a description of columns as tibble
 #' @author Michal Burda
 #' @export
 report_columns <- function(.data,
