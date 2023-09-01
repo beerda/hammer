@@ -4,7 +4,8 @@
 #' @return a description of columns as tibble
 #' @author Michal Burda
 #' @export
-report_columns <- function(.data, ...) {
+report_columns <- function(.data,
+                           ...) {
     .must_be_data_frame(.data)
 
     res <- tibble()
@@ -12,7 +13,7 @@ report_columns <- function(.data, ...) {
     for (var in colnames(.data)) {
         x <- .data[[var]]
 
-        r <- tibble(variable = var,
+        r <- tibble(variable = format_string(var, ...),
                     class = paste(class(x), collapse = " "),
                     values = format_count_percent(sum(!is.na(x)), length(x), ...),
                     `N/A` = format_count_percent(sum(is.na(x)), length(x), ...),
@@ -33,7 +34,7 @@ report_columns <- function(.data, ...) {
 
         if (is.factor(x)) {
             for (l in levels(x)) {
-                r <- tibble(variable = paste0("\u2022 ", l),
+                r <- tibble(variable = paste0("\u2022 ", format_string(l, ...)),
                             class = "",
                             values = aggreg_count_percent(x, level = l, ...),
                             `N/A` = "",
