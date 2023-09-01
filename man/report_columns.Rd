@@ -4,7 +4,7 @@
 \alias{report_columns}
 \title{Generate a table describing all columns in a data frame}
 \usage{
-report_columns(.data)
+report_columns(.data, ...)
 }
 \arguments{
 \item{.data}{a data frame}

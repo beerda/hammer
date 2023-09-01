@@ -5,7 +5,7 @@
 \title{Convert the data into strings reporting relative frequencies in the form of
 textual bar-chart}
 \usage{
-format_bars(p, n, width = 20, symbol = "I", fill = "-", ...)
+format_bars(p, n, width = 20, symbol = "I", fill = " ", ...)
 }
 \arguments{
 \item{p}{an integerish vector of positive cases.}
