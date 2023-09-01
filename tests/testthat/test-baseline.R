@@ -176,3 +176,21 @@ test_that("baseline without grouping", {
     expect_equal(res$all,
                  c("60", "5.59 ± 6.01", "-0.02 ± 0.94", "", "30 (50.00 %)", "30 (50.00 %)"))
 })
+
+
+test_that("baseline max_width", {
+    d <- data.frame(abcdefghijklmn = factor(c("1234567890", "0987654321")))
+    res <- baseline(d,
+                    .n = FALSE,
+                    .all = TRUE,
+                    .test = FALSE,
+                    .type = "robust",
+                    .max_width = 5,
+                    .bullet = " * ")
+
+    expect_true(is.data.frame(res))
+    expect_equal(colnames(res),
+                 c("name", "all"))
+    expect_equal(res$name,
+                 c("abcde...:", " * 09876...", " * 12345..."))
+})

@@ -8,13 +8,15 @@ baseline(
   .data,
   .n = TRUE,
   .all = TRUE,
-  .test = n_groups(.data) > 0,
+  .test = n_groups(.data) > 1,
   .type = c("robust", "parametric", "test"),
+  .labels = labels(.data)[[2]],
   .bullet = " • ",
+  .max_width = 30L,
   .numeric_aggreg = NULL,
   .categ_aggreg = NULL,
   .numeric_test = NULL,
-  .categ_test = test_fisher,
+  .categ_test = NULL,
   ...
 )
 }

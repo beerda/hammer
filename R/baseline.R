@@ -57,10 +57,11 @@ baseline <- function(.data,
                      .type = c("robust", "parametric", "test"),
                      .labels = labels(.data)[[2]],
                      .bullet = " \u2022 ",
+                     .max_width = 30L,
                      .numeric_aggreg = NULL,
                      .categ_aggreg = NULL,
                      .numeric_test = NULL,
-                     .categ_test = test_fisher,
+                     .categ_test = NULL,
                      ...) {
     .type <- match.arg(.type)
 
@@ -68,10 +69,15 @@ baseline <- function(.data,
     .must_be_flag(.n)
     .must_be_flag(.all)
     .must_be_flag(.test)
-    .must_be_character_scalar(.bullet)
     .must_be_character_scalar(.type)
+    .must_be_character_vector(.labels)
+    .must_be_character_scalar(.bullet)
+    .must_be_integerish_scalar(.max_width)
+    .must_be_greater_eq(.max_width, 1)
     .must_be_function(.numeric_aggreg, null = TRUE)
     .must_be_function(.categ_aggreg, null = TRUE)
+    .must_be_function(.numeric_test, null = TRUE)
+    .must_be_function(.categ_test, null = TRUE)
 
     groups <- NULL
     if (n_groups(.data) > 1) {
@@ -89,13 +95,13 @@ baseline <- function(.data,
     dots <- list(...)
     vars <- colnames(.data)
     mastervars <- vars
-    labs <- .labels
+    labs <- format_string(.labels, max_width = .max_width)
 
     gi <- !(vars %in% colnames(group_keys(.data)))
     vars <- vars[gi]
     mastervars <- mastervars[gi]
     labs <- labs[gi]
-    .data <- .data[, gi]
+    .data <- .data[, gi, drop = FALSE]
 
     if (.all) {
         groups <- c(groups, list_of(all = seq_len(nrow(.data))))
@@ -113,7 +119,8 @@ baseline <- function(.data,
                 newdata[[paste0('.', v, '=', lev)]] <- x == lev
             }
             labs[i] <- paste0(l, ':')
-            labs <- append(labs, paste0(.bullet, levels(x)), i)
+            levs <- format_string(levels(x), max_width = .max_width)
+            labs <- append(labs, paste0(.bullet, levs), i)
             vars[i] <- NA_character_
             vars <- append(vars, names(newdata), i)
             mastervars <- append(mastervars, rep(NA_character_, nlevels(x)), i)
