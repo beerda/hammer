@@ -24,4 +24,5 @@ Imports:
     grDevices,
     rlang,
     stats,
+    tidyselect,
     vctrs

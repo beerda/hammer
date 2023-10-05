@@ -3,12 +3,14 @@
 
 ## usethis namespace: start
 #' @importFrom cli cli_abort
+#' @importFrom dplyr across
 #' @importFrom dplyr as_tibble
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr group_by
 #' @importFrom dplyr group_indices
 #' @importFrom dplyr group_keys
 #' @importFrom dplyr group_rows
+#' @importFrom dplyr mutate
 #' @importFrom dplyr n_groups
 #' @importFrom dplyr tibble
 #' @importFrom ggplot2 aes
@@ -60,6 +62,8 @@
 #' @importFrom stats shapiro.test
 #' @importFrom stats t.test
 #' @importFrom stats wilcox.test
+#' @importFrom tidyselect enquo
+#' @importFrom tidyselect everything
 #' @importFrom vctrs list_of
 ## usethis namespace: end
 NULL
