@@ -26,7 +26,7 @@
 #' @author Michal Burda
 format_pvalue <- function(x,
                           digits = 4,
-                          thresh = 0.05,
+                          thresh = 0.1,
                           varname = "",
                           ns = "NS",
                           na = "NA",
