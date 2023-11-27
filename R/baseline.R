@@ -78,6 +78,7 @@ baseline <- function(.data,
                      .categ_aggreg = NULL,
                      .numeric_test = NULL,
                      .categ_test = NULL,
+                     .thresh = 0.1,
                      ...) {
     .type <- match.arg(.type)
 
@@ -200,7 +201,7 @@ baseline <- function(.data,
                         numeric(1),
                         orig_data, factor(group_indices(orig_data)), dots, handlers)
         pvals <- rearrange(pvals, by = mastervars)
-        res[['p-value']] <- format_pvalue(pvals, na = "")
+        res[['p-value']] <- format_pvalue(pvals, na = "", thresh = .thresh)
     }
 
     rownames(res) <- NULL
