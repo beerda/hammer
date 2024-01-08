@@ -17,6 +17,7 @@ baseline(
   .categ_aggreg = NULL,
   .numeric_test = NULL,
   .categ_test = NULL,
+  .thresh = 0.1,
   ...
 )
 }
