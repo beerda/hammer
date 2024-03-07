@@ -34,7 +34,10 @@ report_columns <- function(.data,
 
         new_row(res) <- r
 
-        if (is.factor(x)) {
+        if (is.factor(x) || is.logical(x)) {
+            if (is.logical(x)) {
+                x <- factor(x, levels = c("FALSE", "TRUE"))
+            }
             for (l in levels(x)) {
                 r <- tibble(variable = paste0("\u2022 ", format_string(l, ...)),
                             class = "",
@@ -42,7 +45,6 @@ report_columns <- function(.data,
                             `N/A` = "",
                             details = "")
                 new_row(res) <- r
-
             }
         }
     }
