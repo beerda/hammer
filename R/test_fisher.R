@@ -10,7 +10,7 @@
 #' @author Michal Burda
 #' @export
 test_fisher <- function(x, g, ...) {
-    .must_be_factor(x)
+    .must_be_factor_or_logical(x)
     .must_be_factor(g)
     .must_have_equal_lengths(x, g)
 
