@@ -14,7 +14,7 @@ test_fisher <- function(x, g, ...) {
     .must_be_factor(g)
     .must_have_equal_lengths(x, g)
 
-    fit <- fisher.test(x, g, ...)
+    fit <- do_call(fisher.test, x = x, y = g, ...)
 
     fit$p.value
 }

@@ -14,7 +14,7 @@ test_chisq <- function(x, g, ...) {
     .must_be_factor(g)
     .must_have_equal_lengths(x, g)
 
-    fit <- chisq.test(x, g, ...)
+    fit <- do_call(chisq.test, x = x, y = g, ...)
 
     fit$p.value
 }
