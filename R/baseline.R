@@ -6,7 +6,8 @@
         x <- subdata[[var]]
         cl <- class(x)[1]
         if (is.function(handlers[[cl]])) {
-            return(do.call(handlers[[cl]], c(list(x), dots)))
+            return(do_call(handlers[[cl]],
+                           .args = c(list(x), dots)))
         }
     }
 
@@ -23,7 +24,8 @@
         x <- data[[var]]
         cl <- class(x)[1]
         if (is.function(handlers[[cl]])) {
-            return(do.call(handlers[[cl]], c(list(x, g), dots)))
+            return(do_call(handlers[[cl]],
+                           .args = c(list(x, g), dots)))
         }
     }
 
@@ -71,6 +73,7 @@ baseline <- function(.data,
                      .all = TRUE,
                      .test = n_groups(.data) > 1,
                      .type = c("robust", "parametric", "test"),
+                     .adjust = p.adjust.methods,
                      .labels = labels(.data)[[2]],
                      .bullet = " \u2022 ",
                      .max_width = 30L,
@@ -78,9 +81,12 @@ baseline <- function(.data,
                      .categ_aggreg = NULL,
                      .numeric_test = NULL,
                      .categ_test = NULL,
+                     .digits = 2,
+                     .pvalue_digits = 4,
                      .thresh = 0.1,
                      ...) {
     .type <- match.arg(.type)
+    .adjust <- match.arg(.adjust)
 
     .must_be_data_frame(.data)
     .must_be_flag(.n)
@@ -170,7 +176,9 @@ baseline <- function(.data,
         res[[g]] <- vapply(vars,
                            .aggregator,
                            character(1),
-                           subdata, dots, handlers,
+                           subdata,
+                           c(list(digits = .digits), dots),
+                           handlers,
                            USE.NAMES=FALSE)
     }
 
@@ -196,12 +204,21 @@ baseline <- function(.data,
                          logical = .categ_test,
                          factor = .categ_test)
 
-        pvals <- vapply(as.character(colnames(orig_data)),
+        pvals <- vapply(as.character(colnames(.data)),
                         .tester,
                         numeric(1),
-                        orig_data, factor(group_indices(orig_data)), dots, handlers)
+                        .data, factor(group_indices(orig_data)), dots, handlers)
+        adj_pvals <- p.adjust(pvals, method = .adjust)
+
         pvals <- rearrange(pvals, by = mastervars)
-        res[['p-value']] <- format_pvalue(pvals, na = "", thresh = .thresh)
+        pvals <- format_pvalue(pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+        res[['p-value']] <- pvals
+
+        if (.adjust != "none") {
+            adj_pvals <- rearrange(adj_pvals, by = mastervars)
+            adj_pvals <- format_pvalue(adj_pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+            res[['adj. p-value']] <- adj_pvals
+        }
     }
 
     rownames(res) <- NULL
