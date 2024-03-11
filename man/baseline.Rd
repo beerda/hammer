@@ -10,6 +10,7 @@ baseline(
   .all = TRUE,
   .test = n_groups(.data) > 1,
   .type = c("robust", "parametric", "test"),
+  .adjust = p.adjust.methods,
   .labels = labels(.data)[[2]],
   .bullet = " • ",
   .max_width = 30L,
@@ -17,6 +18,8 @@ baseline(
   .categ_aggreg = NULL,
   .numeric_test = NULL,
   .categ_test = NULL,
+  .digits = 2,
+  .pvalue_digits = 4,
   .thresh = 0.1,
   ...
 )
