@@ -4,7 +4,7 @@
 \alias{report_outliers}
 \title{Generate a summary table of outliers in numeric columns of a data frame}
 \usage{
-report_outliers(.data)
+report_outliers(.data, id, digits = 2)
 }
 \arguments{
 \item{.data}{the data frame}
