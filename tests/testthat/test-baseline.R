@@ -138,6 +138,7 @@ test_that("baseline pvalues", {
                     .n = FALSE,
                     .all = FALSE,
                     .test = TRUE,
+                    .adjust = "none",
                     .type = "parametric",
                     .bullet = " * ")
 
