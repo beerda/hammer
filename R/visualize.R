@@ -16,8 +16,6 @@
 #' @return
 #' @author Michal Burda
 #' @export
-#' @import ggmosaic
-#' @import scales
 visualize <- function(data, var1, var2 = NULL, digits = 2, color = FALSE) {
     # TODO fix assertions
     #assert_that(is.data.frame(data))
