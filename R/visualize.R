@@ -101,15 +101,16 @@ visualize <- function(data, var1, var2 = NULL, digits = 2, color = FALSE) {
                 theme(legend.position='none')
 
         } else {
-            dd <- data.frame(x = val1, y = val2)
-            g <- ggplot(dd) +
-                geom_mosaic(aes(x = product(x, y), fill = x), offset = 0.02) +
-                theme(legend.position = 'none') +
-                labs(y = var1, x = var2)
-
-            if (!color) {
-                g <- g + scale_fill_grey()
-            }
+            #dd <- data.frame(x = val1, y = val2)
+            #g <- ggplot(dd) +
+                #geom_mosaic(aes(x = product(x, y), fill = x), offset = 0.02) +
+                #theme(legend.position = 'none') +
+                #labs(y = var1, x = var2)
+#
+            #if (!color) {
+                #g <- g + scale_fill_grey()
+            #}
+            stop("not implemented")
         }
     }
 
