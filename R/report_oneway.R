@@ -61,7 +61,7 @@ report_oneway <- function(data,
             tab$statistic <- format_number(tab$statistic, digits = digits)
             tab$`mean rank diff` = format_number(tab$estimate, digits = digits)
             tab$p <- format_pvalue(tab$p, thresh = thresh)
-            tab$p.adj <- format_pvalue(tab$p.adj)
+            tab$p.adj <- format_pvalue(tab$p.adj, thresh = thresh)
             tab <- tab[, c("group1", "group2", "n1", "n2", "mean rank diff", "p", "p.adj", "effect")]
 
             res[["test"]] <- paragraph(
@@ -100,7 +100,7 @@ report_oneway <- function(data,
                                    paired = TRUE,
                                    p.adjust.method = adjust)
             tab$p <- format_pvalue(tab$p, thresh = thresh)
-            tab$p.adj <- format_pvalue(tab$p.adj)
+            tab$p.adj <- format_pvalue(tab$p.adj, thresh = thresh)
             tab <- tab[, c("group1", "group2", "n1", "n2", "p", "p.adj")]
 
             res[["test"]] <- paragraph(
