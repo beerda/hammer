@@ -5,8 +5,8 @@
 #' @param name the name of the data axis
 #' @export
 #' @author Michal Burda
-freq_plot <- function(x,
-                      name = deparse(substitute(x))) {
+plot_frequency <- function(x,
+                           name = deparse(substitute(x))) {
     .must_be_factor(x)
     .must_be_character_scalar(name)
 
