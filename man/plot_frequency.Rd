@@ -5,7 +5,7 @@
 \title{Plot the frequency bar chart with absolute and relative count in text over each
 bar.}
 \usage{
-plot_frequency(x, name = deparse(substitute(x)))
+plot_frequency(x, weight = NULL, name = deparse(substitute(x)))
 }
 \arguments{
 \item{x}{The factor data to plot}

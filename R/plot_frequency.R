@@ -6,9 +6,15 @@
 #' @export
 #' @author Michal Burda
 plot_frequency <- function(x,
+                           weight = NULL,
                            name = deparse(substitute(x))) {
     .must_be_factor(x)
+    .must_be_numeric_vector(weight, null = TRUE)
     .must_be_character_scalar(name)
+
+    if (!is.null(weight)) {
+        .must_have_equal_lengths(x, weight)
+    }
 
     if (any(is.na(x))) {
         levels(x) <- c(levels(x), '(NA)')
@@ -16,20 +22,34 @@ plot_frequency <- function(x,
     }
 
     d <- data.frame(x = x)
+    if (!is.null(weight)) {
+        d$weight <- weight
+    }
+
     lim <- max(table(d$x))
 
-    g <- ggplot(d) +
-        aes(y = x,
-            x = after_stat(.data$count)) +
+    g <- ggplot(d)
+
+    if (is.null(weight)) {
+        g <- g + aes(y = x,
+                     x = after_stat(.data$count))
+    } else {
+        g <- g + aes(weight = weight,
+                     y = x,
+                     x = after_stat(.data$count))
+    }
+
+    g <- g +
         geom_bar(colour = "black", fill = "gray") +
-        geom_text(aes(label = after_stat(paste0(.data$count,
-                                                ' (',
-                                                round(100 * .data$count / sum(.data$count)),
-                                                ' %)'))),
-                  hjust =  -0.2,
-                  stat = 'count',
-                  color = "black",
-                  size = 3) +
+        #geom_text(aes(label = after_stat(paste0(format_number(.data$count, digits = 0),
+                                                #' (',
+                                                #round(100 * .data$count / sum(.data$count)),
+                                                #' %)'))),
+        geom_text(aes(label = after_stat(format_count_percent(.data$count, sum(.data$count)))),
+            hjust =  -0.2,
+            stat = 'count',
+            color = "black",
+            size = 3) +
         #scale_x_continuous(expand = c(0, 0),
                            #limits = c(NA, lim * 1.15)) +
         scale_x_continuous(expand = expansion(mult = c(0, 0.35))) +
