@@ -7,9 +7,9 @@
 format_count_percent(p, n, ignore_na = FALSE, ...)
 }
 \arguments{
-\item{p}{an integerish vector of positive cases.}
+\item{p}{a numeric vector of positive cases.}
 
-\item{n}{an integerish vector of all cases.}
+\item{n}{a numeric vector of all cases.}
 
 \item{ignore_na}{if \code{FALSE}, the \code{NA} values will result into something like \code{"NA (NA \%)"}.
 If \code{TRUE}, such results will be replaced with an empty string. Any other value
