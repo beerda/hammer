@@ -39,17 +39,22 @@ plot_frequency <- function(x,
                      x = after_stat(.data$count))
     }
 
+    g <- g + geom_bar(colour = "black", fill = "gray")
+    if (is.null(weight)) {
+        g <- g + geom_text(aes(label = after_stat(format_count_percent(.data$count, sum(.data$count)))),
+                           hjust =  -0.2,
+                           stat = 'count',
+                           color = "black",
+                           size = 3)
+    } else {
+        g <- g + geom_text(aes(label = after_stat(format_percent(.data$count / sum(.data$count)))),
+                           hjust =  -0.2,
+                           stat = 'count',
+                           color = "black",
+                           size = 3)
+    }
+
     g <- g +
-        geom_bar(colour = "black", fill = "gray") +
-        #geom_text(aes(label = after_stat(paste0(format_number(.data$count, digits = 0),
-                                                #' (',
-                                                #round(100 * .data$count / sum(.data$count)),
-                                                #' %)'))),
-        geom_text(aes(label = after_stat(format_count_percent(.data$count, sum(.data$count)))),
-            hjust =  -0.2,
-            stat = 'count',
-            color = "black",
-            size = 3) +
         #scale_x_continuous(expand = c(0, 0),
                            #limits = c(NA, lim * 1.15)) +
         scale_x_continuous(expand = expansion(mult = c(0, 0.35))) +
