@@ -52,6 +52,7 @@
 #'      respectively.
 #' @param .labels a character vector of column labels (defaults to column names
 #'      of `.data`)
+#' @param .group_names whether to put group variable names into header of the result
 #' @param .bullet a string used as a bullet in enumeration of factor levels
 #' @param .max_width a maximum width of variable names or factor levels provided
 #'      in the first column of the result (formatted by [format_string()])
@@ -75,6 +76,7 @@ baseline <- function(.data,
                      .type = c("robust", "parametric", "test"),
                      .adjust = p.adjust.methods,
                      .labels = labels(.data)[[2]],
+                     .group_names = FALSE,
                      .bullet = " \u2022 ",
                      .max_width = 30L,
                      .numeric_aggreg = NULL,
@@ -92,6 +94,7 @@ baseline <- function(.data,
     .must_be_flag(.n)
     .must_be_flag(.all)
     .must_be_flag(.test)
+    .must_be_flag(.group_names)
     .must_be_character_scalar(.type)
     .must_be_character_vector(.labels)
     .must_be_character_scalar(.bullet)
@@ -111,8 +114,13 @@ baseline <- function(.data,
     groups <- NULL
     if (n_groups(.data) > 1) {
         groups <- group_rows(.data)
+        keys <- group_keys(.data)
+        if (.group_names) {
+            keys <- lapply(names(keys),
+                           function(n) paste(n, keys[[n]], sep="="))
+        }
         names(groups) <- Reduce(function(...) paste(..., sep='/'),
-                                group_keys(.data))
+                                keys)
     } else {
         if (!isTRUE(.all)) {
             cli_abort(c("Can't create baseline table if data are not grouped and {.var {.all}} is FALSE."))

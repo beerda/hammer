@@ -12,6 +12,7 @@ baseline(
   .type = c("robust", "parametric", "test"),
   .adjust = p.adjust.methods,
   .labels = labels(.data)[[2]],
+  .group_names = FALSE,
   .bullet = " • ",
   .max_width = 30L,
   .numeric_aggreg = NULL,
@@ -43,6 +44,8 @@ respectively.}
 
 \item{.labels}{a character vector of column labels (defaults to column names
 of \code{.data})}
+
+\item{.group_names}{whether to put group variable names into header of the result}
 
 \item{.bullet}{a string used as a bullet in enumeration of factor levels}
 
