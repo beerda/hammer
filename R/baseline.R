@@ -119,11 +119,14 @@ baseline <- function(.data,
             keys <- lapply(names(keys),
                            function(n) paste(n, keys[[n]], sep="="))
         }
-        names(groups) <- Reduce(function(...) paste(..., sep='/'),
-                                keys)
+        nn <- Reduce(function(...) paste(..., sep="/"),
+                              keys)
+        nn <- as.character(nn)
+        nn[is.na(nn)] <- "NA"
+        names(groups) <- nn
     } else {
         if (!isTRUE(.all)) {
-            cli_abort(c("Can't create baseline table if data are not grouped and {.var {.all}} is FALSE."))
+            cli_abort(c("Can't create baseline table if data are not grouped and {.var .all} is FALSE."))
         }
     }
 
