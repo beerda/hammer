@@ -14,10 +14,11 @@ format_enumeration <- function(x,
                                max = 5,
                                dots = "...",
                                ...) {
-    .must_be_atomic_vector(x)
+    .must_be_atomic_vector(x, null = TRUE)
     .must_be_character_scalar(sep)
-    .must_be_integerish_scalar(max)
     .must_be_character_scalar(dots)
+    .must_be_integerish_scalar(max)
+    .must_be_greater_eq(max, 1)
 
     x <- as.character(x)
     if (length(x) > max) {
