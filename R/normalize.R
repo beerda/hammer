@@ -15,7 +15,7 @@ normalize <- function(data,
     isVector <- FALSE
     if (is.vector(data)) {
         .must_be_numeric_vector(data)
-        data <- data.frame(result = data)
+        data <- data.frame(data)
         isVector <- TRUE
         loc <- 1
     } else {
@@ -30,14 +30,23 @@ normalize <- function(data,
     .must_be_flag(center)
     .must_be_flag(scale)
 
+    n <- colnames(data)
+    if (is.null(n)) {
+        n <- as.character(seq_along(data))
+    }
+
     for (i in loc) {
         val <- data[[i]]
         norm <- NULL
         if (is.numeric(val)) {
             if (normalize) {
                 loo <- length(na.omit(val)) < 30
-                norm <- bestNormalize(val, loo = loo, ...)
-                val <- norm$chosen_transform$x.t
+                norm <- try({ bestNormalize(val, loo = loo, ...) }, silent = TRUE)
+                if (inherits(norm, 'try-error')) {
+                    stop(paste0('Normalization failed for column `', n[i], '` with error: ', norm))
+                } else {
+                    val <- norm$chosen_transform$x.t
+                }
             }
             if (center || scale) {
                 val <- scale(val, center = center, scale = scale)
@@ -52,7 +61,7 @@ normalize <- function(data,
     }
 
     if (isVector) {
-        data <- data$result
+        data <- data[[1]]
     }
 
    data
