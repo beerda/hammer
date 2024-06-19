@@ -66,3 +66,7 @@ normalize <- function(data,
 
    data
 }
+
+
+#' @export
+normalise <- normalize
