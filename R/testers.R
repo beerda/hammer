@@ -105,6 +105,7 @@
 .must_be_function <- ..must_be_type(is.function, "function")
 .must_be_list <- ..must_be_type(is.list, "list")
 .must_be_data_frame <- ..must_be_type(is.data.frame, "data frame")
+.must_be_formula_with_lhs <- ..must_be_type(function(x) is_formula(x, lhs = TRUE), "formula with lhs")
 
 .must_be_list_of_logicals <- ..must_be_list_of(is.logical, "logical vectors")
 .must_be_list_of_doubles <- ..must_be_list_of(is.double, "double (numeric) vectors")
