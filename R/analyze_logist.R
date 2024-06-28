@@ -3,11 +3,11 @@
 #' @author Michal Burda
 #' @export
 #' @importFrom logistf logistf
-report_logist <- function(data,
-                          formula,
-                          firth = FALSE,
-                          digits = 3,
-                          aes = NULL) {
+analyze_logist <- function(data,
+                           formula,
+                           firth = FALSE,
+                           digits = 3,
+                           aes = NULL) {
     .must_be_data_frame(data)
     .must_be_formula_with_lhs(formula)
     .must_be_flag(firth)
@@ -51,5 +51,5 @@ report_logist <- function(data,
             ylab("predicted probability")
     }
 
-    report(res)
+    analysis(res)
 }

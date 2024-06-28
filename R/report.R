@@ -2,8 +2,8 @@
 #' @return
 #' @author Michal Burda
 #' @export
-report <- function(x) {
+analysis <- function(x) {
     structure(x,
-              class = c("report", "list"))
+              class = c("analysis", "list"))
 }
 

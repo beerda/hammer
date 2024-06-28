@@ -7,7 +7,7 @@
 #' @importFrom rstatix dunn_test
 #' @importFrom rstatix anova_test
 #' @importFrom rstatix pairwise_t_test
-analyze_oneway <- function(data,
+report_oneway <- function(data,
                           var,
                           group,
                           id = NULL,
@@ -130,5 +130,5 @@ analyze_oneway <- function(data,
         stop("not implemented type = ", type)
     }
 
-    analysis(res)
+    report(res)
 }
