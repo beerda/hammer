@@ -1,4 +1,4 @@
-#' Return p-value of the ANOVA test
+#' Return p-value of the Analysis of Variance
 #'
 #' This function is a wrapper over the [aov()] function.
 #' It performs the analysis of variance and returns the resulting p-value.

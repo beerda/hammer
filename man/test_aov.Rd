@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_aov.R
 \name{test_aov}
 \alias{test_aov}
-\title{Return p-value of the ANOVA test}
+\title{Return p-value of the Analysis of Variance}
 \usage{
 test_aov(x, g, confounders = NULL, ...)
 }
