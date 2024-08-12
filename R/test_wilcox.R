@@ -11,13 +11,15 @@
 #' @author Michal Burda
 #' @export
 test_wilcox <- function(x, g, ...) {
-    .must_be_numeric_vector(x)
+    .must_be_numeric_vector_or_ordered_factor(x)
     .must_be_factor(g)
     .must_have_length(levels(g), 2)
     .must_have_equal_lengths(x, g)
 
-    a <- x[as.integer(g) == 1]
-    b <- x[as.integer(g) == 2]
+    x <- as.numeric(x)
+    g <- as.integer(g)
+    a <- x[g == 1]
+    b <- x[g == 2]
     fit <- wilcox.test(a, b, ...)
 
     fit$p.value

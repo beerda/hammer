@@ -100,12 +100,15 @@
 .must_be_numeric_vector <- ..must_be_type(is.numeric, "numeric vector")
 .must_be_character_vector <- ..must_be_type(is.character, "character vector")
 .must_be_factor <- ..must_be_type(is.factor, "factor")
-.must_be_factor_or_logical <- ..must_be_type(function(x) is.factor(x) || is.logical(x), "factor or logical")
+.must_be_ordered_factor <- ..must_be_type(is.ordered, "ordered factor")
 .must_be_matrix <- ..must_be_type(is.matrix, "matrix")
 .must_be_function <- ..must_be_type(is.function, "function")
 .must_be_list <- ..must_be_type(is.list, "list")
 .must_be_data_frame <- ..must_be_type(is.data.frame, "data frame")
 .must_be_formula_with_lhs <- ..must_be_type(function(x) is_formula(x, lhs = TRUE), "formula with lhs")
+
+.must_be_factor_or_logical <- ..must_be_type(function(x) is.factor(x) || is.logical(x), "factor or logical")
+.must_be_numeric_vector_or_ordered_factor <- ..must_be_type(function(x) is.numeric(x) || is.ordered(x), "numeric vector or ordered factor")
 
 .must_be_list_of_logicals <- ..must_be_list_of(is.logical, "logical vectors")
 .must_be_list_of_doubles <- ..must_be_list_of(is.double, "double (numeric) vectors")
