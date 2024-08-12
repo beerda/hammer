@@ -65,6 +65,9 @@
 #'      obtain the default function where `k` is the number of groups of `.data`.
 #' @param .categ_test a custom function used to provide p-value of the test on
 #'      categorical columns. If `NULL`, [test_fisher()] is used as a default.
+#' @param .ordinal_test a custom function used to provide p-value of the test on
+#'     ordered factor columns. If `NULL`, robust type of test is used as a default
+#'     (see `create_numeric_test(.type, k)`).
 #' @param ... further arguments passed to aggregating or testing functions.
 #' @seealso [create_numeric_aggreg()], [create_numeric_test()]
 #' @export
@@ -83,6 +86,7 @@ baseline <- function(.data,
                      .categ_aggreg = NULL,
                      .numeric_test = NULL,
                      .categ_test = NULL,
+                     .ordinal_test = NULL,
                      .digits = 2,
                      .pvalue_digits = 4,
                      .thresh = 0.1,
@@ -104,6 +108,7 @@ baseline <- function(.data,
     .must_be_function(.categ_aggreg, null = TRUE)
     .must_be_function(.numeric_test, null = TRUE)
     .must_be_function(.categ_test, null = TRUE)
+    .must_be_function(.ordinal_test, null = TRUE)
 
     if (length(.labels) != ncol(.data)) {
         cli_abort(c("The length of {.var .labels} must be equal to the number of columns of {.var .data}.",
@@ -209,11 +214,15 @@ baseline <- function(.data,
         if (is.null(.categ_test)) {
             .categ_test <- test_fisher
         }
+        if (is.null(.ordinal_test)) {
+            .ordinal_test <- create_numeric_test("robust", k = length(orig_groups))
+        }
 
         handlers <- list(numeric = .numeric_test,
                          integer = .numeric_test,
                          logical = .categ_test,
-                         factor = .categ_test)
+                         factor = .categ_test,
+                         ordered = .ordinal_test)
 
         pvals <- vapply(as.character(colnames(.data)),
                         .tester,

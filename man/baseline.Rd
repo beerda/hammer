@@ -19,6 +19,7 @@ baseline(
   .categ_aggreg = NULL,
   .numeric_test = NULL,
   .categ_test = NULL,
+  .ordinal_test = NULL,
   .digits = 2,
   .pvalue_digits = 4,
   .thresh = 0.1,
@@ -64,6 +65,10 @@ obtain the default function where \code{k} is the number of groups of \code{.dat
 
 \item{.categ_test}{a custom function used to provide p-value of the test on
 categorical columns. If \code{NULL}, \code{\link[=test_fisher]{test_fisher()}} is used as a default.}
+
+\item{.ordinal_test}{a custom function used to provide p-value of the test on
+ordered factor columns. If \code{NULL}, robust type of test is used as a default
+(see \code{create_numeric_test(.type, k)}).}
 
 \item{...}{further arguments passed to aggregating or testing functions.}
 }
