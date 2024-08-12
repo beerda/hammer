@@ -7,6 +7,7 @@ analyze_logist <- function(data,
                            formula,
                            firth = FALSE,
                            digits = 3,
+                           thresh = 0.05,
                            aes = NULL) {
     .must_be_data_frame(data)
     .must_be_formula_with_lhs(formula)
@@ -39,7 +40,7 @@ analyze_logist <- function(data,
                   error = format_number(error, digits),
                   `odds ratio` = format_number(odds_ratio, digits),
                   `odds ratio 95% CI` = format_interval(odds_ci[, 1], odds_ci[, 2], digits = digits),
-                  p = format_pvalue(p))
+                  p = format_pvalue(p, thresh = thresh))
     res$model <- kable(mdl, align = "r")
 
     if (!is.null(aes)) {
