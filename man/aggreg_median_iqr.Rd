@@ -4,10 +4,12 @@
 \alias{aggreg_median_iqr}
 \title{Compute the median and lower/upper quartile of the given numeric vector}
 \usage{
-aggreg_median_iqr(x, ...)
+aggreg_median_iqr(data, var, ...)
 }
 \arguments{
-\item{x}{the vector to be processed}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to be processed}
 
 \item{...}{further arguments passed to \code{\link[=format_number]{format_number()}}}
 }
@@ -16,7 +18,7 @@ The formatted string containing the median and lower/upper quartile.
 }
 \description{
 The function returns the formatted "median (lower_quartile -- upper_quartile)"
-of vector \code{x}.
+of column \code{var} in data frame \code{data}.
 }
 \seealso{
 \code{\link[=aggreg_mean_sd]{aggreg_mean_sd()}}

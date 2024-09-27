@@ -1,8 +1,9 @@
 #' Compute the count of the given level in the given vector
 #'
-#' The function returns the number of occurrences of `level` in vector `x`.
+#' The function returns the number of occurrences of `level` in column `var` of data frame `data`.
 #'
-#' @param x the vector to compute the occurences of `level` in. It must be an atomic vector.
+#' @param data the data frame
+#' @param var the name of the column to compute the occurences of `level` in. It must be an atomic vector.
 #' @param level the level to be computed. It could be either integerish value or a string or `NA`.
 #' The integerish value is treated as the index of level to be counted, character value selects
 #' the level to be counted by its name, and `NA` selects missing values to be counted.
@@ -15,7 +16,12 @@
 #' aggreg_count(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")    # 2
 #' aggreg_count(c("b", "a", "a"), level = "a")                         # 2
 #' aggreg_count(c(NA, "b", "a", "a"), level = NA)                      # 1
-aggreg_count <- function(x, level = 1) {
+aggreg_count <- function(data, var, level = 1) {
+    .must_be_data_frame(data)
+    .must_be_string(var)
+
+    x <- data[[var]]
+
     .must_be_atomic_vector(x)
     ..must_be_type(function(a) is_scalar_integerish(a) ||
                        is_scalar_character(a) ||

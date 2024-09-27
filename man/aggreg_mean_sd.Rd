@@ -4,10 +4,12 @@
 \alias{aggreg_mean_sd}
 \title{Compute the mean and standard deviation of the given numeric vector}
 \usage{
-aggreg_mean_sd(x, ...)
+aggreg_mean_sd(data, var, ...)
 }
 \arguments{
-\item{x}{the vector to be processed}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to be processed}
 
 \item{...}{further arguments passed to \code{\link[=format_number]{format_number()}}}
 }
@@ -16,7 +18,7 @@ The formatted string containing the mean and standard deviation.
 }
 \description{
 The function returns the formatted \code{"mean ± stdev"}
-of vector \code{x}.
+of column \code{var} of data frame \code{data}.
 }
 \seealso{
 \code{\link[=aggreg_median_iqr]{aggreg_median_iqr()}}

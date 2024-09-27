@@ -4,10 +4,12 @@
 \alias{aggreg_count_percent}
 \title{Compute absolute and relative frequency of the given level in the given vector.}
 \usage{
-aggreg_count_percent(x, level = 1, use_na = FALSE, ...)
+aggreg_count_percent(data, var, level = 1, use_na = FALSE, ...)
 }
 \arguments{
-\item{x}{the vector to compute the occurences of \code{level} in. It must be an atomic vector.}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to compute the occurences of \code{level} in. It must be an atomic vector.}
 
 \item{level}{the level to be computed. It could be either integerish value or a string or \code{NA}.
 The integerish value is treated as the index of level to be counted, character value selects
@@ -22,7 +24,7 @@ The absolute and relative number of occurences of \code{level} in \code{x}.
 }
 \description{
 The function returns the absolute and relative number (percentage) of occurences
-of \code{level} in vector \code{x}.
+of \code{level} in column \code{var} in data frame \code{data}.
 }
 \seealso{
 \code{\link[=format_count_percent]{format_count_percent()}}, \code{\link[=aggreg_count]{aggreg_count()}}, \code{\link[=aggreg_percent]{aggreg_percent()}}

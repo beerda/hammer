@@ -1,6 +1,7 @@
 #' Compute the relative frequency (percentage) of the given level in the given vector
 #'
-#' The function returns the relative number (percentage) of occurences of `level` in vector `x`.
+#' The function returns the relative number (percentage) of occurences of `level` in
+#' column `var` of data frame `data`.
 #' @param x the vector to compute the occurences of `level` in. It must be an atomic vector.
 #' @param level the level to be computed. It could be either integerish value or a string or `NA`.
 #'      The integerish value is treated as the index of level to be counted, character value selects
@@ -17,10 +18,16 @@
 #' aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = "FALSE")  # 2/5
 #' aggreg_percent(c("b", "a", "a"), level = "a")                       # 2/3
 #' aggreg_percent(c(NA, "b", "a", "a"), level = NA, use_na = TRUE)     # 1/4
-aggreg_percent <- function(x,
+aggreg_percent <- function(data,
+                           var,
                            level = 1,
                            use_na = FALSE,
                            ...) {
+    .must_be_data_frame(data)
+    .must_be_string(var)
+
+    x <- data[[var]]
+
     .must_be_atomic_vector(x)
     ..must_be_type(function(a) is_scalar_integerish(a) ||
                        is_scalar_character(a) ||
@@ -31,7 +38,7 @@ aggreg_percent <- function(x,
     if (!use_na) {
         x <- na.omit(x)
     }
-    p <- aggreg_count(x, level)
+    p <- aggreg_count(data.frame(x = x), "x", level)
     n <- length(x)
 
     format_percent(p / n, ...)

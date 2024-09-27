@@ -4,10 +4,12 @@
 \alias{aggreg_count}
 \title{Compute the count of the given level in the given vector}
 \usage{
-aggreg_count(x, level = 1)
+aggreg_count(data, var, level = 1)
 }
 \arguments{
-\item{x}{the vector to compute the occurences of \code{level} in. It must be an atomic vector.}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to compute the occurences of \code{level} in. It must be an atomic vector.}
 
 \item{level}{the level to be computed. It could be either integerish value or a string or \code{NA}.
 The integerish value is treated as the index of level to be counted, character value selects
@@ -17,7 +19,7 @@ the level to be counted by its name, and \code{NA} selects missing values to be 
 The number of occurences of \code{level} in \code{x}
 }
 \description{
-The function returns the number of occurrences of \code{level} in vector \code{x}.
+The function returns the number of occurrences of \code{level} in column \code{var} of data frame \code{data}.
 }
 \examples{
 aggreg_count(c(FALSE, FALSE ,TRUE, TRUE, TRUE), level = 1)          # 3

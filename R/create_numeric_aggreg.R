@@ -43,12 +43,13 @@ create_numeric_aggreg <- function(type = c("robust", "parametric", "test"),
     if (type == "parametric")
         return(parametric_aggreg)
 
-    function(x, ...) {
+    function(data, var, ...) {
+        x <- data[[var]]
         fit <- normality_test(x)
         if (fit$p.value < normality_thresh)
-            return(robust_aggreg(x, ...))
+            return(robust_aggreg(data, var, ...))
         else
-            return(parametric_aggreg(x, ...))
+            return(parametric_aggreg(data, var, ...))
     }
 }
 

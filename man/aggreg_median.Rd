@@ -4,10 +4,12 @@
 \alias{aggreg_median}
 \title{Compute the median of the given numeric vector}
 \usage{
-aggreg_median(x, ...)
+aggreg_median(data, var, ...)
 }
 \arguments{
-\item{x}{the vector to be processed}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to be processed}
 
 \item{...}{further arguments passed to \code{\link[=format_number]{format_number()}}}
 }
@@ -16,7 +18,7 @@ The formatted string containing the median.
 }
 \description{
 The function returns the formatted "median"
-of vector \code{x}.
+of column \code{var} in data frame \code{data}.
 }
 \seealso{
 \code{\link[=aggreg_median_iqr]{aggreg_median_iqr()}}

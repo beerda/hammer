@@ -4,11 +4,9 @@
 \alias{aggreg_percent}
 \title{Compute the relative frequency (percentage) of the given level in the given vector}
 \usage{
-aggreg_percent(x, level = 1, use_na = FALSE, ...)
+aggreg_percent(data, var, level = 1, use_na = FALSE, ...)
 }
 \arguments{
-\item{x}{the vector to compute the occurences of \code{level} in. It must be an atomic vector.}
-
 \item{level}{the level to be computed. It could be either integerish value or a string or \code{NA}.
 The integerish value is treated as the index of level to be counted, character value selects
 the level to be counted by its name, and \code{NA} selects missing values to be counted.}
@@ -16,13 +14,16 @@ the level to be counted by its name, and \code{NA} selects missing values to be 
 \item{use_na}{if \code{FALSE} then \code{NA} values are omitted prior computing the frequency.}
 
 \item{...}{further arguments passed to \code{\link[=format_percent]{format_percent()}}}
+
+\item{x}{the vector to compute the occurences of \code{level} in. It must be an atomic vector.}
 }
 \value{
 The relative number of occurences of \code{level} in \code{x}, i.e., the fraction number
 in the interval from 0 to 1.
 }
 \description{
-The function returns the relative number (percentage) of occurences of \code{level} in vector \code{x}.
+The function returns the relative number (percentage) of occurences of \code{level} in
+column \code{var} of data frame \code{data}.
 }
 \examples{
 aggreg_percent(c(FALSE, FALSE, TRUE, TRUE, TRUE), level = 1)        # 3/5

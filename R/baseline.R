@@ -7,7 +7,7 @@
         cl <- class(x)[1]
         if (is.function(handlers[[cl]])) {
             return(do_call(handlers[[cl]],
-                           .args = c(list(x), dots)))
+                           .args = c(list(data = subdata, var = var), dots)))
         }
     }
 

@@ -91,8 +91,9 @@
 .must_be_atomic_scalar <- ..must_be_type(is_scalar_atomic, "atomic scalar")
 .must_be_integerish_scalar <- ..must_be_type(is_scalar_integerish, "integerish scalar")
 .must_be_double_scalar <- ..must_be_type(is_scalar_double, "double scalar")
-.must_be_character_scalar <- ..must_be_type(is_scalar_character, "character scalar")
 .must_be_logical_scalar <- ..must_be_type(is_scalar_logical, "logical scalar")
+.must_be_character_scalar <- ..must_be_type(is_scalar_character, "character scalar")
+.must_be_string <- .must_be_character_scalar
 
 .must_be_atomic_vector <- ..must_be_type(is.atomic, "atomic vector")
 .must_be_integer_vector <- ..must_be_type(is_integer, "integer vector")

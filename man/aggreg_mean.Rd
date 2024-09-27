@@ -4,10 +4,12 @@
 \alias{aggreg_mean}
 \title{Compute the mean of the given numeric vector}
 \usage{
-aggreg_mean(x, ...)
+aggreg_mean(data, var, ...)
 }
 \arguments{
-\item{x}{the vector to be processed}
+\item{data}{the data frame}
+
+\item{var}{the name of the column to be processed}
 
 \item{...}{further arguments passed to \code{\link[=format_number]{format_number()}}}
 }
@@ -16,7 +18,7 @@ The formatted string containing the mean.
 }
 \description{
 The function returns the formatted \code{"mean"}
-of vector \code{x}.
+of column \code{var} in data frame \code{data}.
 }
 \seealso{
 \code{\link[=aggreg_mean_sd]{aggreg_mean_sd()}}
