@@ -41,7 +41,7 @@ report_columns <- function(.data,
             for (l in levels(x)) {
                 r <- tibble(variable = paste0("\u2022 ", format_string(l, ...)),
                             class = "",
-                            values = aggreg_count_percent(x, level = l, ...),
+                            values = aggreg_count_percent(data.frame(x = x), "x", level = l, ...),
                             `N/A` = "",
                             details = "")
                 new_row(res) <- r
