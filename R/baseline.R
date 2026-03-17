@@ -68,6 +68,12 @@
 #' @param .ordinal_test a custom function used to provide p-value of the test on
 #'     ordered factor columns. If `NULL`, robust type of test is used as a default
 #'     (see `create_numeric_test(.type, k)`).
+#' @param .digits the number of digits to round the aggregated numeric values to
+#' @param .pvalue_digits the number of digits to round p-values to. `NA` means
+#'     that p-values are not rounded and are printed with the maximum precision
+#'     provided.
+#' @param .thresh the p-value threshold over which the p-value is formatted as
+#'     not significant (see [format_pvalue()])
 #' @param ... further arguments passed to aggregating or testing functions.
 #' @seealso [create_numeric_aggreg()], [create_numeric_test()]
 #' @export
@@ -231,12 +237,16 @@ baseline <- function(.data,
         adj_pvals <- p.adjust(pvals, method = .adjust)
 
         pvals <- rearrange(pvals, by = mastervars)
-        pvals <- format_pvalue(pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+        if (!is.na(.pvalue_digits)) {
+            pvals <- format_pvalue(pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+        }
         res[['p-value']] <- pvals
 
         if (.adjust != "none") {
             adj_pvals <- rearrange(adj_pvals, by = mastervars)
-            adj_pvals <- format_pvalue(adj_pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+            if (!is.na(.pvalue_digits)) {
+                adj_pvals <- format_pvalue(adj_pvals, na = "", thresh = .thresh, digits = .pvalue_digits)
+            }
             res[['adj. p-value']] <- adj_pvals
         }
     }
