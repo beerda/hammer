@@ -40,6 +40,7 @@ format_number <- function(x,
       result <- ifelse(abs(x) >= 0.1, r, s)
   }
 
+  result[x == 0] <- "0"
   result[is.na(x)] <- na
 
   result

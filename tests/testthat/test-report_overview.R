@@ -9,7 +9,7 @@ test_that("report_overview", {
                  c("rows:", "\u2022 fully specified", "\u2022 partially N/A", "\u2022 fully N/A",
                    "columns:", "\u2022 constant", "\u2022 fully specified", "\u2022 partially N/A", "\u2022 fully N/A"))
     expect_equal(res$value,
-                 c("5 (100.00 %)", "0 (0.00 %)", "5 (100.00 %)", "0 (0.00 %)",
+                 c("5 (100.00 %)", "0 (0 %)", "5 (100.00 %)", "0 (0 %)",
                    "4 (100.00 %)", "2 (50.00 %)", "2 (50.00 %)", "1 (25.00 %)", "1 (25.00 %)"))
     expect_equal(res$details,
                  c("", "", "1, 2, 3, 4, 5", "", "", "c, d", "a, d", "b", "c"))
