@@ -17,10 +17,29 @@ format_number <- function(x,
   .must_be_greater_eq(digits, 0)
   .must_be_character_scalar(na)
 
-  result <- format(round(x, digits = digits),
-                   nsmall = digits,
-                   scientific = FALSE,
-                   trim = TRUE)
+  result <- NULL
+  if (digits == 0) {
+      result <- format(round(x, digits = 0),
+                       nsmall = 0,
+                       scientific = FALSE,
+                       trim = TRUE)
+  } else {
+      r <- format(round(x, digits = digits),
+                  nsmall = digits,
+                  scientific = FALSE,
+                  trim = TRUE)
+
+      f <- function(x) {
+          format(signif(x, digits = digits),
+                 nsmall = digits,
+                 scientific = FALSE,
+                 trim = TRUE)
+      }
+      s <- vapply(x, f, character(1))
+
+      result <- ifelse(abs(x) >= 0.1, r, s)
+  }
+
   result[is.na(x)] <- na
 
   result

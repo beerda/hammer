@@ -21,7 +21,7 @@ test_that("baseline test_numeric n/all", {
     expect_equal(res$y,
                  c("4", "1.00 (1.00 -- 1.75)", "-0.53 ± 0.11"))
     expect_equal(res$all,
-                 c("8", "1.00 (1.00 -- 1.50)", "-0.08 ± 1.04"))
+                 c("8", "1.00 (1.00 -- 1.50)", "-0.083 ± 1.04"))
 })
 
 
