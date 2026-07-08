@@ -21,6 +21,6 @@ test_that("format_pvalue", {
   expect_equal(format_pvalue(NA_real_, digits = 4, thresh = 0.0001, varname = 'p'),
                "p=NA")
 
-  expect_equal(format_pvalue(c(NA, 0.2, 0.0012), digits = 4, thresh = 0.05),
+  expect_equal(format_pvalue(c(NA, 0.2, 0.001211), digits = 4, thresh = 0.05),
                c("NA", "NS", "0.0012"))
 })

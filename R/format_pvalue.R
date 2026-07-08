@@ -61,7 +61,7 @@ format_pvalue <- function(x,
         if (p < 1/10^digits) {
             return(paste0(varname, "<", format(1/10^digits, nsmall=digits, scientific=FALSE)))
         } else {
-            return(paste0(varname, eq, format_number(p, digits)))
+            return(paste0(varname, eq, format_number(p, digits = digits, style = "fixed")))
         }
     }, character(1))
 

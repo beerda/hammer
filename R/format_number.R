@@ -11,11 +11,14 @@
 format_number <- function(x,
                           digits = 2,
                           na = "NA",
+                          style = "signif",
                           ...) {
   .must_be_numeric_vector(x)
   .must_be_integerish_scalar(digits)
   .must_be_greater_eq(digits, 0)
   .must_be_character_scalar(na)
+  .must_be_character_scalar(style)
+  .must_be_enum(style, c("signif", "fixed"))
 
   result <- NULL
   if (digits == 0) {
@@ -29,15 +32,19 @@ format_number <- function(x,
                   scientific = FALSE,
                   trim = TRUE)
 
-      f <- function(x) {
-          format(signif(x, digits = digits),
-                 nsmall = digits,
-                 scientific = FALSE,
-                 trim = TRUE)
-      }
-      s <- vapply(x, f, character(1))
+      if (style == "fixed") {
+          result <- r
+      } else {
+          f <- function(x) {
+              format(signif(x, digits = digits),
+                     nsmall = digits,
+                     scientific = FALSE,
+                     trim = TRUE)
+          }
+          s <- vapply(x, f, character(1))
 
-      result <- ifelse(abs(x) >= 0.1, r, s)
+          result <- ifelse(abs(x) >= 0.1, r, s)
+      }
   }
 
   result[x == 0] <- "0"

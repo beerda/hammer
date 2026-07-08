@@ -4,7 +4,7 @@
 \alias{format_number}
 \title{Convert the numeric vector to character vector}
 \usage{
-format_number(x, digits = 2, na = "NA", ...)
+format_number(x, digits = 2, na = "NA", style = "signif", ...)
 }
 \arguments{
 \item{x}{the numeric vector to be converted}

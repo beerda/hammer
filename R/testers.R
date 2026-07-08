@@ -124,6 +124,32 @@
 .must_be_in_range <- ..must_be_comparable(function(x, range) x >= range[1] & x <= range[2],
                                           "between")
 
+.must_be_enum <- function(x,
+                          values,
+                          null = FALSE,
+                          multi = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+    test <- FALSE
+    if (is.null(x)) {
+        test <- isTRUE(null)
+    } else {
+        if (isTRUE(multi)) {
+            test <- all(x %in% values)
+        } else {
+            test <- x %in% values
+        }
+    }
+    if (!isTRUE(test)) {
+        msg <- if (null) " or NULL" else ""
+        single <- if (isTRUE(multi)) "any" else "one"
+        vals <- paste0('"', values, '"', collapse = ", ")
+        cli_abort(c("{.arg {arg}} must be equal to {single} of: {vals}{msg}.",
+                    "x" = "You've supplied {.val {x}}."),
+                  call = call)
+    }
+}
+
 .must_have_length <- function(x,
                               value,
                               name = deparse(substitute(x)),
