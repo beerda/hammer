@@ -11,6 +11,7 @@ format_pvalue(
   varname = "",
   ns = "NS",
   na = "NA",
+  adjust = NULL,
   ...
 )
 }
@@ -29,6 +30,9 @@ non-significant}
 \item{ns}{the string used for non-significant values}
 
 \item{na}{the string to be used for \code{NA} values}
+
+\item{adjust}{if not \code{NULL}, the p-values are adjusted using the method
+specified in this argument (see \code{\link[=p.adjust]{p.adjust()}} for possible methods)}
 
 \item{...}{further arguments that are ignored}
 }

@@ -20,6 +20,8 @@
 #'      `"varname = value"`
 #' @param ns the string used for non-significant values
 #' @param na the string to be used for `NA` values
+#' @param adjust if not `NULL`, the p-values are adjusted using the method
+#'     specified in this argument (see [p.adjust()] for possible methods)
 #' @param ... further arguments that are ignored
 #' @returns a character vector of transformed numeric values
 #' @export
@@ -30,6 +32,7 @@ format_pvalue <- function(x,
                           varname = "",
                           ns = "NS",
                           na = "NA",
+                          adjust = NULL,
                           ...) {
     .must_be_numeric_vector(x)
     .must_be_integerish_scalar(digits)
@@ -43,6 +46,11 @@ format_pvalue <- function(x,
     eq <- ifelse(varname != "", "=", "")
     na <- paste0(varname, eq, na)
     ns <- paste0(varname, eq, ns)
+
+    if (!is.null(adjust)) {
+        x <- p.adjust(x, method = adjust)
+    }
+
     res <- vapply(x, function(p) {
         if (is.na(p)) {
             return(na)
