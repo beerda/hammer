@@ -11,6 +11,7 @@ report_correlations <- function(data,
     p_adjust <- match.arg(p_adjust)
 
     grid <- expand_grid(xvars=xvars, yvars=yvars)
+    grid <- grid[grid$xvars != grid$yvars, ]
     result <- apply(grid, 1, function(row) {
         d <- data.frame(x=data[[row[1]]],
                         y=data[[row[2]]])
