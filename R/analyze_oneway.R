@@ -7,17 +7,17 @@
 #' @importFrom rstatix dunn_test
 #' @importFrom rstatix anova_test
 #' @importFrom rstatix pairwise_t_test
-report_oneway <- function(data,
-                          var,
-                          group,
-                          id = NULL,
-                          omit_levels = NULL,
-                          type = c("robust", "parametric"),
-                          paired = FALSE,
-                          adjust = p.adjust.methods,
-                          boxplot = TRUE,
-                          digits = 2,
-                          thresh = 0.1) {
+analyze_oneway <- function(data,
+                           var,
+                           group,
+                           id = NULL,
+                           omit_levels = NULL,
+                           type = c("robust", "parametric"),
+                           paired = FALSE,
+                           adjust = p.adjust.methods,
+                           boxplot = TRUE,
+                           digits = 2,
+                           thresh = 0.1) {
     type = match.arg(type)
 
     .must_be_data_frame(data)

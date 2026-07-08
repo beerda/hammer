@@ -6,13 +6,15 @@
 analyze_logist <- function(data,
                            formula,
                            firth = FALSE,
-                           digits = 3,
-                           thresh = 0.05,
+                           digits = 2,
+                           thresh = 1.00,
+                           figData = NULL,
                            aes = NULL) {
     .must_be_data_frame(data)
     .must_be_formula_with_lhs(formula)
     .must_be_flag(firth)
     .must_be_integerish_scalar(digits)
+    .must_be_data_frame(figData, null = TRUE)
 
     if (firth) {
         fit <- logistf(formula, data = data)
@@ -29,7 +31,7 @@ analyze_logist <- function(data,
         p <- coef(s)[, 'Pr(>|z|)']
     }
 
-    ci <- confint(fit)
+    ci <- suppressMessages(confint(fit))
     odds_ratio <- exp(estimate)
     odds_ci <- exp(ci)
 
@@ -45,12 +47,22 @@ analyze_logist <- function(data,
 
     if (!is.null(aes)) {
         data[["#predicted#"]] <- predict(fit, data, type = "response")
-        res$predicted_plot <- ggplot(data) +
+        res$predicted_plot1 <- ggplot(data) +
             aes(y = `#predicted#`) +
             aes +
-            geom_point() +
+            geom_point(na.rm = TRUE) +
             ylab("predicted probability")
+        if (!is.null(figData)) {
+            figData[["#predicted#"]] <- predict(fit, figData, type = "response")
+            res$predicted_plot2 <- ggplot(figData) +
+                aes(y = `#predicted#`) +
+                aes +
+                geom_point(na.rm = TRUE) +
+                ylab("predicted probability")
+        }
     }
+
+    attr(res, "fit") <- fit
 
     analysis(res)
 }

@@ -37,7 +37,7 @@ report_outliers <- function(.data, id, digits = 2) {
                                     group = gname,
                                     value = format_number(o, digits = digits),
                                     type = ifelse(o %in% ex, "extreme", "outlier"),
-                                    `median (Q1 - Q3)` = aggreg_median_iqr(x, digits = digits),
+                                    `median (Q1 - Q3)` = aggreg_median_iqr(data.frame(x = x), "x", digits = digits),
                                     ids = format_enumeration(ids),
                                     count = format_count_percent(sum(x == o), length(x)))
                         new_row(res) <- r
