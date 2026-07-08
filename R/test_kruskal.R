@@ -14,7 +14,8 @@ test_kruskal <- function(x, g, ...) {
     .must_be_factor(g)
     .must_have_equal_lengths(x, g)
 
-    fit <- kruskal.test(x, g, ...)
-
-    fit$p.value
+    na_if_fails({
+        fit <- kruskal.test(x, g, ...)
+        fit$p.value
+    })
 }

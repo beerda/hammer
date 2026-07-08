@@ -20,7 +20,9 @@ test_wilcox <- function(x, g, ...) {
     g <- as.integer(g)
     a <- x[g == 1]
     b <- x[g == 2]
-    fit <- wilcox.test(a, b, ...)
 
-    fit$p.value
+    na_if_fails({
+        fit <- wilcox.test(a, b, ...)
+        fit$p.value
+    })
 }

@@ -17,7 +17,9 @@ test_t <- function(x, g, ...) {
 
     a <- x[as.integer(g) == 1]
     b <- x[as.integer(g) == 2]
-    fit <- t.test(a, b, ...)
 
-    fit$p.value
+    na_if_fails({
+        fit <- t.test(a, b, ...)
+        fit$p.value
+    })
 }

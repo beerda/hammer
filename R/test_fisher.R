@@ -18,7 +18,8 @@ test_fisher <- function(x, g, ...) {
         return(NA_real_)
     }
 
-    fit <- do_call(fisher.test, x = x, y = g, ...)
-
-    fit$p.value
+    na_if_fails({
+        fit <- do_call(fisher.test, x = x, y = g, ...)
+        fit$p.value
+    })
 }

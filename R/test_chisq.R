@@ -18,7 +18,8 @@ test_chisq <- function(x, g, ...) {
         return(NA_real_)
     }
 
-    fit <- do_call(chisq.test, x = x, y = g, ...)
-
-    fit$p.value
+    na_if_fails({
+        fit <- do_call(chisq.test, x = x, y = g, ...)
+        fit$p.value
+    })
 }
