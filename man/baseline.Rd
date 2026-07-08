@@ -70,6 +70,15 @@ categorical columns. If \code{NULL}, \code{\link[=test_fisher]{test_fisher()}} i
 ordered factor columns. If \code{NULL}, robust type of test is used as a default
 (see \code{create_numeric_test(.type, k)}).}
 
+\item{.digits}{the number of digits to round the aggregated numeric values to}
+
+\item{.pvalue_digits}{the number of digits to round p-values to. \code{NA} means
+that p-values are not rounded and are printed with the maximum precision
+provided.}
+
+\item{.thresh}{the p-value threshold over which the p-value is formatted as
+not significant (see \code{\link[=format_pvalue]{format_pvalue()}})}
+
 \item{...}{further arguments passed to aggregating or testing functions.}
 }
 \description{

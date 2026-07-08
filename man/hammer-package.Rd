@@ -11,5 +11,10 @@ Personal package of miscellaneous R functions for data analyses.
 \author{
 \strong{Maintainer}: Michal Burda \email{michal.burda@osu.cz} (\href{https://orcid.org/0000-0002-4182-4407}{ORCID})
 
+Authors:
+\itemize{
+  \item Michal Burda \email{michal.burda@osu.cz} (\href{https://orcid.org/0000-0002-4182-4407}{ORCID})
+}
+
 }
 \keyword{internal}
