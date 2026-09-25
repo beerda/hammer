@@ -12,6 +12,7 @@ format_pvalue(
   ns = "NS",
   na = "NA",
   adjust = NULL,
+  stars = FALSE,
   ...
 )
 }

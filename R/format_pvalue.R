@@ -33,6 +33,7 @@ format_pvalue <- function(x,
                           ns = "NS",
                           na = "NA",
                           adjust = NULL,
+                          stars = FALSE,
                           ...) {
     .must_be_numeric_vector(x)
     .must_be_integerish_scalar(digits)
@@ -64,6 +65,26 @@ format_pvalue <- function(x,
             return(paste0(varname, eq, format_number(p, digits = digits, style = "fixed")))
         }
     }, character(1))
+
+    if (stars) {
+        st <- vapply(x, function(p) {
+            if (is.na(p)) {
+                return("")
+            }
+            if (p < 0.001) {
+                return("***")
+            } else if (p < 0.01) {
+                return("**")
+            } else if (p < 0.05) {
+                return("*")
+            } else if (p < 0.1) {
+                return("·")
+            } else {
+                return("")
+            }
+        }, character(1))
+        res <- paste0(res, "  ", st)
+    }
 
     res
 }
